@@ -28,4 +28,15 @@ class LoginController extends Controller
         session()->flash('gagalLogin', 'pesan.gagal("Login failed!")');
         return redirect('/login');
     }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/');
+    }
 }

@@ -26,13 +26,14 @@ Route::get('/about', function () {
 });
 
 // Login
-Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->name('login');
 Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout']);
 // Register
-Route::post('/register', [RegisterController::class, 'store'])->name('register');
+Route::post('/register', [RegisterController::class, 'store'])->middleware('guest')->name('register');
 // Dashboard
 Route::get('/dashboard', function () {
-    return view('dashboard.index');
+    return view('dashboard.indexx');
 })->middleware('auth');
 
 
