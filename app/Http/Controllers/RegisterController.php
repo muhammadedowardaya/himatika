@@ -37,12 +37,6 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|max:255',
-            'username' => 'required|min:3|max:255|unique:users',
-            'email' => 'required|email:dns|min:3|unique:users',
-            'password' => 'required|min:5|max:255',
-        ]);
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255',
@@ -56,7 +50,15 @@ class RegisterController extends Controller
             return redirect('/login')
                 ->withErrors($validator)
                 ->withInput();
+            // dd('gagal');
         } else {
+            // dd('berhasil');
+            $validatedData = $request->validate([
+                'name' => 'required|max:255',
+                'username' => 'required|min:3|max:255|unique:users',
+                'email' => 'required|email:dns|min:3|unique:users',
+                'password' => 'required|min:5|max:255',
+            ]);
             $validatedData['password'] = Hash::make($validatedData['password']);
             User::create($validatedData);
             return redirect('/login')->with('berhasilRegistrasi', 'pesan.berhasil("Registrasi berhasil, silakan login!")');

@@ -45,8 +45,8 @@
         <form action="/login" method="post">
             @csrf
             <h3>Sign In</h3>
-            <input type="email" placeholder="Email" autofocus value="{{ old('email') }}"
-                class="@error('email') is-invalid @enderror" name="email" />
+            <input type="email" placeholder="Email" id="email" autofocus class="@error('email') is-invalid @enderror"
+                name="email" value="{{ old('email') }}" />
             @error('email')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -66,7 +66,7 @@
 
     <!-- signUp -->
     <div class="form signupForm">
-        <form action="{{ route('register') }}" method="post">
+        <form action="/register" method="post">
             @csrf
             <h3>Sign Up</h3>
             <input type="text" placeholder="Name" name="name" class="@error('name') is-invalid @enderror"
@@ -129,6 +129,9 @@
                 });
             }
         });
+        $('.signupForm form input[type="text"]').val('');
+        $('.signupForm form input[type="email"]').val('');
+        $('.signupForm form input[type="password"]').val('');
     });
 
     signinBtn.addEventListener("click", function() {
@@ -142,6 +145,8 @@
                 });
             }
         });
+        $('.signinForm form input[type="email"]').val('');
+
     });
 
     formInput.forEach(input => {

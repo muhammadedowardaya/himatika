@@ -10,7 +10,7 @@ class LoginController extends Controller
 
     public function index()
     {
-        return view('login.index', ['status' => 'login']);
+        return view('auth.login');
     }
 
     public function authenticate(Request $request)
@@ -26,6 +26,6 @@ class LoginController extends Controller
             return redirect()->intended('/dashboard');
         }
         session()->flash('gagalLogin', 'pesan.gagal("Login failed!")');
-        return redirect('/login')->with(['status' => 'login']);
+        return redirect('/login');
     }
 }
