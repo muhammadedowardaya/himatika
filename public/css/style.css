@@ -1,0 +1,52 @@
+@font-face {
+    font-family: "LibreBaskerville-Bold";
+    src: url(../font/LibreBaskerville-Bold.ttf);
+}
+@font-face {
+    font-family: "LibreBaskerville-Regular";
+    src: url(../font/LibreBaskerville-Regular.ttf);
+}
+@font-face {
+    font-family: "LibreBaskerville-Italic";
+    src: url(../font/LibreBaskerville-Italic.ttf);
+}
+
+.card-title,
+.navbar-brand {
+    font-family: LibreBaskerville-Bold;
+}
+
+.card-body,
+.nav-item {
+    font-family: LibreBaskerville-Regular;
+}
+
+.card-body p a {
+    font-family: LibreBaskerville-Italic;
+}
+
+@media (min-width: 992px) {
+    .card-body {
+        font-size: small;
+    }
+    article h3 {
+        font-size: large;
+    }
+}
+
+.card {
+    position: relative;
+    overflow: hidden;
+}
+
+.kategoriLabel {
+    position: absolute;
+    left: -250px;
+}
+
+.kategoriLabel a {
+    margin-top: 10px;
+    display: block;
+    border-top-right-radius: 1.3rem;
+    border-bottom-right-radius: 1.3rem;
+}
