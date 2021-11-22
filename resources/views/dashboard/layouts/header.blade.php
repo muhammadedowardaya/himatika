@@ -10,7 +10,7 @@
             <form action="/logout" method="post">
                 @csrf
                 <button type="submit" class="nav-link px-3 bg-dark border-0">
-                    <i class="bi bi-box-arrow-in-right"></i> Logout
+                    <span data-feather="log-out"></span> Logout
                 </button>
             </form>
         </div>

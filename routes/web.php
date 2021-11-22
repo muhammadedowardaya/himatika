@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\{CategoryController, PostController};
-use App\Http\Controllers\{LoginController, RegisterController, DashboardController};
+use App\Http\Controllers\{CategoryController, DashboardPostController, PostController};
+use App\Http\Controllers\{LoginController, RegisterController};
 
 use App\Models\{User};
 use Illuminate\Support\Facades\Route;
@@ -25,16 +25,21 @@ Route::get('/about', function () {
     return view('about');
 });
 
-// Login
+// Login--------------------------------
 Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->name('login');
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
-// Register
+
+// Register------------------------------
 Route::post('/register', [RegisterController::class, 'store'])->middleware('guest')->name('register');
-// Dashboard
+
+// Dashboard-----------------------------
 Route::get('/dashboard', function () {
-    return view('dashboard.indexx');
+    return view('dashboard.index');
 })->middleware('auth');
+
+// Dashboard Post-------------------------
+Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
 
 
 Route::prefix('posts')->group(function () {
