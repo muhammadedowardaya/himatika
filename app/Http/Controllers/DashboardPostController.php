@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\{Post, Category};
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class DashboardPostController extends Controller
@@ -48,10 +49,12 @@ class DashboardPostController extends Controller
         ]);
 
         $validatedData['user_id'] = auth()->user()->id;
+        $validatedData['slug'] = Str::slug(request('title'));
 
-        Post::create($validatedData);
+        dd($validatedData);
+        // Post::create($validatedData);
 
-        return redirect('/dashboard/posts')->with('success', 'New Post has been Added!');
+        // return redirect('/dashboard/posts')->with('success', 'New Post has been Added!');
     }
 
     /**
@@ -99,11 +102,5 @@ class DashboardPostController extends Controller
     public function destroy(Post $post)
     {
         //
-    }
-
-    public function checkSlug(Request $request)
-    {
-        $slug = SlugService::createSlug(Post::class, 'slug', $request->title);
-        return response()->json(['slug' => $slug]);
     }
 }

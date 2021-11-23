@@ -21,16 +21,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="mb-3">
-                    <label for="slug" class="form-label">Slug</label>
-                    <input type="text" name="slug" class="form-control" id="slug" disabled readonly required
-                        @error('slug') is-invalid @enderror>
-                    @error('slug')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
+
                 <div class="mb-3">
                     <label for="category" class="form-label">Category</label>
                     <select class="form-select @error('category_id') is-invalid @enderror" id="category" name="category_id">
@@ -63,6 +54,7 @@
         </div>
     </div>
 
+
 @endsection
 
 @section('head')
@@ -78,19 +70,37 @@
 
 @section('script')
     <script>
-        const title = document.querySelector('#title');
-        const slug = document.querySelector('#slug');
+        // const title = document.querySelector('#title');
+        // const slug = document.querySelector('#slug');
+        const trixEditor = document.querySelector('trix-editor');
+        const body = document.querySelector('#body');
 
 
-        title.addEventListener('change', function() {
-            fetch('/dashboard/posts/checkSlug?title=' + title.value)
-                .then(response => response.json())
-                .then(data => slug.value = data.slug)
-        });
+        // title.addEventListener('change', function() {
+        //     fetch('/dashboard/posts/checkSlug?title=' + title.value)
+        //         .then(response => response.json())
+        //         .then(data => slug.value = data.slug)
+        // });
 
         // mematikan fungsi file pada trix editor
         document.addEventListener('trix-file-accept', function(e) {
             e.preventDefault();
         })
+
+        // trixEditor.addEventListener('keydown', function(e) {
+        //     console.log('kamu mencet TAB?');
+        //     if (e.key == 'Tab') {
+        //         e.preventDefault();
+
+        //         var start = trixEditor.selectionStart;
+        //         var end = trixEditor.selectionEnd;
+
+        //         // set textarea value to: text before caret + tab + text after caret
+        //         body.value = body.value.substring(1, start) + "\t" + body.value.substring(end);
+
+        //         // put caret at right position again
+        //         trixEditor.selectionStart = trixEditor.selectionEnd = start + 1;
+        //     }
+        // });
     </script>
 @endsection

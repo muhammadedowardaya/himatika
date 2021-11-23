@@ -12,7 +12,6 @@
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
-                    {{-- {{ dd($loop) }} --}}
                     <th scope="col">No</th>
                     <th scope="col">Title</th>
                     <th scope="col">Category</th>
