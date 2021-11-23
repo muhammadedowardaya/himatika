@@ -8,6 +8,7 @@
     </div>
 
     <div class="table-responsive">
+        <a href="/dashboard/posts/create" class="btn btn-primary mb-3"></a>
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
@@ -24,8 +25,17 @@
                         <td scope="row">{{ $posts->perPage() * ($posts->currentPage() - 1) + $loop->iteration }}</td>
                         <td>{{ $post->title }}
                         <td>{{ $post->category->name }}</td>
-                        <td>edit</td>
-                        <td>hapus</td>
+                        <td>
+                            <a href="/dashboard/posts/{{ $post->slug }}" class="badge bg-primary">
+                                <span data-feather="eye"></span>
+                            </a>
+                            <a href="" class="badge bg-warning">
+                                <span data-feather="edit" stroke-width="2"></span>
+                            </a>
+                            <a href="" class="badge bg-danger">
+                                <span data-feather="trash-2" stroke-width="2"></span>
+                            </a>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

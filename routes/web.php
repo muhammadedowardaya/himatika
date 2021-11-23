@@ -42,16 +42,19 @@ Route::get('/dashboard', function () {
 Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
 
 
+// Posts------------------------------------
 Route::prefix('posts')->group(function () {
     Route::get('/', [PostController::class, 'index'])->name('posts');
     Route::get('show/{post:slug}', [PostController::class, 'show'])->name('posts.show');
 });
 
+// Category-----------------------------------
 Route::prefix('category')->group(function () {
     Route::get('/', [CategoryController::class, 'index'])->name('categories');
     Route::get('/{category:slug}', [CategoryController::class, 'show'])->name('categories.show');
 });
 
+// Author
 Route::get('authors/{author:username}', function (User $author) {
     return view('posts.index', [
         'title' => "Post By Author : $author->name",
