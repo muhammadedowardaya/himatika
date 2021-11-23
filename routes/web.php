@@ -38,11 +38,12 @@ Route::get('/dashboard', function () {
     return view('dashboard.index');
 })->middleware('auth');
 
-// cek slug untuk membuat post baru
-Route::get('/dashboard/posts/checkSlug', [DashboardPostController::class, 'checkSlug'])->middleware('auth');
-
 // Dashboard Post-------------------------
-Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
+Route::prefix('/dashboard/posts')->middleware('auth')->group(function () {
+    Route::get('/', [DashboardPostController::class, 'index']);
+    Route::get('/create', [DashboardPostController::class, 'create']);
+    Route::post('/', [DashboardPostController::class, 'store']);
+});
 
 
 // Posts------------------------------------

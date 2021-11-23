@@ -58,8 +58,8 @@ class DashboardPostController extends Controller
 
         // echo 'gebleg';
         // Post::create($validatedData);
-
-        return redirect('/dashboard/posts')->with('success', 'New Post has been Added!');
+        session()->flash('success', 'pesan.berhasil("New Post has been added!")');
+        return view('dashboard.posts.index');
     }
 
     /**
