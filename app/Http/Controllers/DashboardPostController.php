@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostRequest;
 use App\Models\{Post, Category};
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class DashboardPostController extends Controller
 {
@@ -39,22 +39,27 @@ class DashboardPostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-        $validatedData = $request->validate([
-            'title' => 'required|max:255',
-            'slug' => 'required|unique:posts',
-            'category_id' => 'required',
-            'body' => 'required'
-        ]);
+        $post = new Post;
+        $post->title = $request->title;
+        $post->slug = Str::slug($request->title);
+        $post->body = $request->body;
+        $post->save();
+        // $validatedData = $request->validate([
+        //     'title' => 'required|max:255',
+        //     'slug' => 'required|unique:posts',
+        //     'category_id' => 'required',
+        //     'body' => 'required'
+        // ]);
 
-        $validatedData['user_id'] = auth()->user()->id;
-        $validatedData['slug'] = Str::slug(request('title'));
+        // $validatedData['user_id'] = auth()->user()->id;
+        // $validatedData['slug'] = Str::slug($request->title);
 
-        dd($validatedData);
+        // echo 'gebleg';
         // Post::create($validatedData);
 
-        // return redirect('/dashboard/posts')->with('success', 'New Post has been Added!');
+        return redirect('/dashboard/posts')->with('success', 'New Post has been Added!');
     }
 
     /**
