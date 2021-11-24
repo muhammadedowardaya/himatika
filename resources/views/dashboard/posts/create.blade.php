@@ -8,11 +8,11 @@
 
     <div class="row">
         <div class="col-lg-8">
-            <form action="/dashboard/posts" method="POST">
+            <form action="{{ route('posts.store') }}" method="POST">
                 @csrf
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
-                    <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" required
+                    <input type="text" class="form-control @error('title') is-invalid @enderror" id="title"
                         value="{{ old('title') }}" name="title">
                     @error('title')
                         <div class="invalid-feedback">
@@ -54,17 +54,6 @@
     </div>
 
 
-@endsection
-
-@section('head')
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/trix.css') }}">
-    <style>
-        trix-toolbar [data-trix-button-group="file-tools"] {
-            display: none;
-        }
-
-    </style>
-    <script type="text/javascript" src="{{ asset('js/trix.js') }}"></script>
 @endsection
 
 @section('script')

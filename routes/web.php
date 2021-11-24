@@ -16,6 +16,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Dashboard Post-------------------------
+Route::prefix('/dashboard/posts')->middleware('auth')->group(function () {
+    Route::get('/', [DashboardPostController::class, 'index']);
+    Route::get('/create', [DashboardPostController::class, 'create']);
+    Route::post('/', [DashboardPostController::class, 'store'])->name('posts.store');
+});
 
 Route::get('/', function () {
     return view('home');
@@ -38,12 +44,7 @@ Route::get('/dashboard', function () {
     return view('dashboard.index');
 })->middleware('auth');
 
-// Dashboard Post-------------------------
-Route::prefix('/dashboard/posts')->middleware('auth')->group(function () {
-    Route::get('/', [DashboardPostController::class, 'index']);
-    Route::get('/create', [DashboardPostController::class, 'create']);
-    Route::post('/', [DashboardPostController::class, 'store']);
-});
+
 
 
 // Posts------------------------------------

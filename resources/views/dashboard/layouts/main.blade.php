@@ -11,6 +11,16 @@
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+    {{-- Trix Editor --}}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/trix.css') }}">
+    <style>
+        trix-toolbar [data-trix-button-group="file-tools"] {
+            display: none;
+        }
+
+    </style>
+    <script type="text/javascript" src="{{ asset('js/trix.js') }}"></script>
+
     @yield('head')
 </head>
 
