@@ -41,11 +41,10 @@ class DashboardPostController extends Controller
      */
     public function store(PostRequest $request)
     {
-        $post = new Post;
-        $post->title = $request->title;
-        $post->slug = Str::slug($request->title);
-        $post->body = $request->body;
-        $post->save();
+        $post = $request->all();
+        $post['slug'] = Str::slug($request->title);
+        $post['user_id'] = auth()->user()->id;
+        Post::create($post);
 
         // $validatedData = $request->validate([
         //     'title' => 'required|max:255',
@@ -59,8 +58,8 @@ class DashboardPostController extends Controller
 
         // echo 'gebleg';
         // Post::create($validatedData);
-        session()->flash('success', 'pesan.berhasil("New Post has been added!")');
-        return view('dashboard.posts.index');
+        // session()->flash('success', 'pesan.berhasil("New Post has been added!")');
+        return redirect('/dashboard/posts')->with('success', 'pesan.berhasil("New Post has been added!")');
     }
 
     /**
@@ -107,6 +106,7 @@ class DashboardPostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        Post::destroy($post->id);
+        return redirect('/dashboard/posts')->with('success', 'pesan.berhasil("Post has been deleted!")');
     }
 }

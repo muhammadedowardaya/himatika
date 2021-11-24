@@ -42,6 +42,7 @@
 
     <script src="{{ asset('js/feather.min.js') }}"></script>
     <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
     {{-- <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
         integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous">
     </script> --}}
@@ -56,6 +57,32 @@
     </script>
     {{-- Untuk javascript --}}
     @yield('script')
+
+    <script>
+        const pesan = {
+            berhasil: (text) => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: text
+                });
+            }
+        }
+
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+        })
+    </script>
+
+    @if (session('success'))
+        <script>
+            {!! session('success') !!}
+        </script>
+    @endif
 </body>
 
 </html>

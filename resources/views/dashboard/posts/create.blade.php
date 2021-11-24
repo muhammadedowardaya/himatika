@@ -29,7 +29,7 @@
                 <div class="mb-3">
                     <label for="category" class="form-label">Category</label>
                     <select class="form-select @error('category_id') is-invalid @enderror" id="category" name="category_id">
-                        <option selected disabled>Choose One</option>
+                        <option disabled>Choose One</option>
                         @foreach ($categories as $category)
                             <option value="{{ $category->id }}" @if ($category->id == old('category_id')) selected @endif>{{ $category->name }}</option>
                         @endforeach
