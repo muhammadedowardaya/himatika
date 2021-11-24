@@ -103,14 +103,14 @@
                         /* Read more about handling dismissals below */
                         result.dismiss === Swal.DismissReason.cancel
                     ) {
-                        swalWithBootstrapButtons.fire(
+                        swalWithBootstrapButtons.fire({
                             title: 'Dibatalkan!',
                             text: 'Postingan kamu aman.',
                             imageUrl: "{{ asset('sticker/angel.png') }}",
                             imageWidth: 200,
                             imageHeight: 200,
                             imageAlt: 'Custom image'
-                        )
+                        })
                     }
                 });
             });
