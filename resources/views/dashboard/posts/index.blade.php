@@ -20,7 +20,7 @@
             </thead>
             <tbody>
                 @foreach ($posts as $post)
-                    <tr id="{{ $post->slug }}">
+                    <tr id="{{ $post->id }}">
                         <td scope="row">{{ $posts->perPage() * ($posts->currentPage() - 1) + $loop->iteration }}</td>
                         <td>{{ $post->title }}
                         <td>{{ $post->category->name }}</td>
@@ -39,8 +39,10 @@
                                     <span data-feather="trash" stroke-width="2"></span>
                                 </button>
                             </form> --}}
-                            <a class="badge bg-danger border-0 btnHapus" data-slug="{{ $post->slug }}">
+                            <a class="badge bg-danger border-0 btnHapus" data-slug="{{ $post->slug }}"
+                                data-id="{{ $post->id }}">
                                 <span data-feather="trash" stroke-width="2"></span>
+
                             </a>
                         </td>
                     </tr>
@@ -53,12 +55,18 @@
 
 @section('script')
     <script>
+        $("body").bind("ajaxSend", function(elm, xhr, s) {
+            if (s.type == "POST") {
+                xhr.setRequestHeader('X-CSRF-Token', getCSRFTokenValue());
+            }
+        });
+
         const hapus = document.querySelectorAll('a.btnHapus');
         hapus.forEach(btnHapus => {
             btnHapus.addEventListener('click', (e) => {
                 e.preventDefault();
-                console.log('OK');
 
+                const id = btnHapus.getAttribute('data-id');
                 const slug = btnHapus.getAttribute('data-slug');
 
                 Swal.fire({
@@ -76,9 +84,13 @@
                     imageAlt: 'Custom image',
                 }).then((result) => {
                     if (result.isConfirmed) {
+
                         $.ajax({
                             type: "delete",
-                            url: "/dashboard/posts/" + slug,
+                            url: `<?= url('dashboard/posts/${slug}') ?>`,
+                            data: {
+                                "_token": "{{ csrf_token() }}"
+                            },
                             success: function(response) {
                                 $("#" + id).remove();
                                 Swal.fire({
@@ -90,12 +102,13 @@
                                     imageAlt: 'Custom image',
                                 })
                             },
-                            error: function() {
+                            error: function(response) {
                                 swalWithBootstrapButtons.fire(
                                     'Gagal!',
                                     'Data gagal dihapus.',
                                     'error'
                                 )
+                                console.log(response.responseJSON);
                             },
                         });
 

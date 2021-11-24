@@ -62,7 +62,10 @@
         const pesan = {
             berhasil: (text) => {
                 Swal.fire({
-                    icon: 'success',
+                    imageUrl: "{{ asset('sticker/angel.png') }}",
+                    imageWidth: 200,
+                    imageHeight: 200,
+                    imageAlt: 'Custom image',
                     title: 'Berhasil!',
                     text: text
                 });
