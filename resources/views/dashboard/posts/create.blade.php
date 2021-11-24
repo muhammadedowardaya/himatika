@@ -8,8 +8,13 @@
 
     <div class="row">
         <div class="col-lg-8">
-            <form action="{{ route('posts.store') }}" method="POST">
+            <form action="{{ route('posts.store') }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
+                {{-- @if ($errors->any())
+                    @foreach ($errors->all() as $error)
+                        {{ $error }}
+                    @endforeach
+                @endif --}}
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
                     <input type="text" class="form-control @error('title') is-invalid @enderror" id="title"
@@ -36,8 +41,8 @@
                     @enderror
                 </div>
                 <div class="mb-3">
-                    {{-- <label for="body" class="form-label">Body</label>
-                    
+                    <label for="body" class="form-label">Body</label>
+
                     <input id="body" type="hidden" name="body" class="@error('body') is-invalid @enderror"
                         value="{{ old('body') }}">
                     <trix-editor input="body"></trix-editor>
@@ -45,8 +50,7 @@
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
-                    @enderror --}}
-                    <textarea name="body" id="body" cols="30" rows="10"></textarea>
+                    @enderror
                 </div>
 
                 <button type="submit" class="btn btn-primary">Submit</button>
