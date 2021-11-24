@@ -42,7 +42,14 @@ Route::get('/dashboard', function () {
 Route::get('/dashboard/posts/checkSlug', [DashboardPostController::class, 'checkSlug'])->middleware('auth');
 
 // Dashboard Post-------------------------
-Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
+Route::prefix('/dashboard/posts')->middleware('auth')->group(function () {
+    Route::get('/', [DashboardPostController::class, 'index']);
+    Route::get('/{post:slug}', [DashboardPostController::class, 'show']);
+    Route::get('/create', [DashboardPostController::class, 'create']);
+    Route::post('/', [DashboardPostController::class, 'store'])->name('posts.store');
+    Route::delete('/{post}', [DashboardPostController::class, 'destroy']);
+    Route::patch('/', [DashboardPostController::class, 'update']);
+});
 
 
 // Posts------------------------------------

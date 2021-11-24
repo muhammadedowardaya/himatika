@@ -1,5 +1,8 @@
 @extends('dashboard.layouts.main')
 
+@section('head')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
 
 @section('content')
 
@@ -55,9 +58,9 @@
 
 @section('script')
     <script>
-        $("body").bind("ajaxSend", function(elm, xhr, s) {
-            if (s.type == "POST") {
-                xhr.setRequestHeader('X-CSRF-Token', getCSRFTokenValue());
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
 
@@ -68,6 +71,8 @@
 
                 const id = btnHapus.getAttribute('data-id');
                 const slug = btnHapus.getAttribute('data-slug');
+
+                var _token = $('meta[name=csrf-token]').attr('content');
 
                 Swal.fire({
                     title: 'Apa kamu yakin?',
@@ -84,13 +89,15 @@
                     imageAlt: 'Custom image',
                 }).then((result) => {
                     if (result.isConfirmed) {
-
+                        // const json = {
+                        //     "id": id,
+                        //     "_token": _token
+                        // };
                         $.ajax({
                             type: "delete",
-                            url: `<?= url('dashboard/posts/${slug}') ?>`,
-                            data: {
-                                "_token": "{{ csrf_token() }}"
-                            },
+                            url: `{{ url('dashboard/posts/${id}') }}`,
+                            data: _token,
+                            // dataType: "json",
                             success: function(response) {
                                 $("#" + id).remove();
                                 Swal.fire({
@@ -101,6 +108,7 @@
                                     imageHeight: 200,
                                     imageAlt: 'Custom image',
                                 })
+                                // console.log(json_encode(response));
                             },
                             error: function(response) {
                                 swalWithBootstrapButtons.fire(
@@ -108,7 +116,7 @@
                                     'Data gagal dihapus.',
                                     'error'
                                 )
-                                console.log(response.responseJSON);
+                                // console.log(response.responseJSON);
                             },
                         });
 
