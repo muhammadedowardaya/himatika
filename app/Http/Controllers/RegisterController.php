@@ -37,11 +37,12 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
+        $user = new User();
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255',
             'username' => 'required|min:3|max:255|unique:users',
-            'email' => 'required|email:dns|min:3|unique:users',
+            'email' => 'required|email|unique:users,email,' . $user->id,
             'password' => 'required|min:5|max:255',
         ]);
 
@@ -56,7 +57,7 @@ class RegisterController extends Controller
             $validatedData = $request->validate([
                 'name' => 'required|max:255',
                 'username' => 'required|min:3|max:255|unique:users',
-                'email' => 'required|email:rfc,dns|min:3|unique:users',
+                'email' => 'required|email|unique:users,email,' . $user->id,
                 'password' => 'required|min:5|max:255',
             ]);
             $validatedData['password'] = Hash::make($validatedData['password']);

@@ -11,7 +11,7 @@
     </div>
 
     <div class="table-responsive">
-        <a href="/dashboard/posts/create" class="btn btn-primary mb-3">Create New Post</a>
+        <a href="{{ route('posts.create') }}" class="btn btn-primary mb-3">Create New Post</a>
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
@@ -31,7 +31,7 @@
                             <a href="/dashboard/posts/{{ $post->slug }}" class="badge bg-primary">
                                 <span data-feather="eye"></span>
                             </a>
-                            <a href="" class="badge bg-warning">
+                            <a href="{{ route('posts.edit', $post->slug) }}" class="badge bg-warning">
                                 <span data-feather="edit" stroke-width="2"></span>
                             </a>
                             {{-- <form action="{{ route('posts.destroy', $post->slug) }}" method="post" class="d-inline">

@@ -17,7 +17,7 @@
                                 <span data-feather="arrow-left"></span> Back to All My Posts
                             </a>
                             <div>
-                                <a href="" class="btn btn-sm btn-warning text-dark">
+                                <a href="{{ route('posts.edit', $post->slug) }}" class="btn btn-sm btn-warning text-dark">
                                     <span data-feather="edit"></span> Edit
                                 </a>
                                 <a href="" class="btn btn-sm btn-danger">
@@ -32,13 +32,11 @@
                             <p class="card-text" style="text-align: justify">{!! nl2br($post->body) !!}</p>
                             <small>Dibuat pada : {{ $post->created_at->format('Y F d') }}</small>
                         </article>
-
                     </div>
                     <div class="card-footer">
                         <div class="d-flex justify-content-between mt-3">
-                            <a href="/posts" class="link-secondary">Kembali</a>
-                            <small style="font-size: 12px"
-                                class="mt-1">{{ $post->created_at->diffForHumans() }}</small>
+                            <small style="font-size: 12px">{{ $post->created_at->diffForHumans() }}</small>
+                            <small>Diupdate pada : {{ $post->updated_at->format('Y F d') }}</small>
                         </div>
                     </div>
                 </div>

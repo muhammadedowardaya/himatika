@@ -44,11 +44,12 @@ Route::get('/dashboard/posts/checkSlug', [DashboardPostController::class, 'check
 // Dashboard Post-------------------------
 Route::prefix('/dashboard/posts')->middleware('auth')->group(function () {
     Route::get('/', [DashboardPostController::class, 'index']);
+    Route::get('/create', [DashboardPostController::class, 'create'])->name('posts.create');
     Route::get('/{post:slug}', [DashboardPostController::class, 'show']);
-    Route::get('/create', [DashboardPostController::class, 'create']);
+    Route::get('/edit/{post:slug}', [DashboardPostController::class, 'edit'])->name('posts.edit');
     Route::post('/', [DashboardPostController::class, 'store'])->name('posts.store');
     Route::delete('/{post}', [DashboardPostController::class, 'destroy']);
-    Route::patch('/', [DashboardPostController::class, 'update']);
+    Route::patch('/{post:slug}', [DashboardPostController::class, 'update'])->name('posts.update');
 });
 
 
