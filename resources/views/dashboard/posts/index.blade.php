@@ -1,9 +1,5 @@
 @extends('dashboard.layouts.main')
 
-@section('head')
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-@endsection
-
 @section('content')
 
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -45,7 +41,6 @@
                             <a class="badge bg-danger border-0 btnHapus" data-slug="{{ $post->slug }}"
                                 data-id="{{ $post->id }}">
                                 <span data-feather="trash" stroke-width="2"></span>
-
                             </a>
                         </td>
                     </tr>
@@ -53,6 +48,8 @@
             </tbody>
         </table>
     </div>
+
+    {{ $posts->links() }}
 
 @endsection
 

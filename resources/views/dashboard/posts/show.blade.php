@@ -12,7 +12,7 @@
                         class="card-img-top img-fluid position-relative" alt="...">
 
                     <div class="card-header">
-                        <div class="d-flex justify-content-lg-between">
+                        <div class="d-flex justify-content-between">
                             <a href="/dashboard/posts" class="btn btn-sm btn-success">
                                 <span data-feather="arrow-left"></span> Back to All My Posts
                             </a>
@@ -20,8 +20,9 @@
                                 <a href="{{ route('posts.edit', $post->slug) }}" class="btn btn-sm btn-warning text-dark">
                                     <span data-feather="edit"></span> Edit
                                 </a>
-                                <a href="" class="btn btn-sm btn-danger">
-                                    <span data-feather="trash"></span> Delete
+                                <a class="btn btn-danger btn-sm btnHapus" data-slug="{{ $post->slug }}"
+                                    data-id="{{ $post->id }}">
+                                    <span data-feather="trash" stroke-width="2"></span> Hapus
                                 </a>
                             </div>
                         </div>
@@ -44,4 +45,85 @@
         </div>
     </div>
 
+@endsection
+
+@section('script')
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        const btnHapus = document.querySelector('a.btnHapus');
+        btnHapus.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            const id = btnHapus.getAttribute('data-id');
+            const slug = btnHapus.getAttribute('data-slug');
+
+            var _token = $('meta[name=csrf-token]').attr('content');
+
+            Swal.fire({
+                title: 'Apa kamu yakin?',
+                text: "Kamu tidak dapat mengembalikan data ini!",
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Tidak, batal!',
+                reverseButtons: true,
+                imageUrl: "{{ asset('sticker/surprised.png') }}",
+                imageWidth: 200,
+                imageHeight: 200,
+                imageAlt: 'Custom image',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // const json = {
+                    //     "id": id,
+                    //     "_token": _token
+                    // };
+                    $.ajax({
+                        type: "delete",
+                        url: `{{ url('dashboard/posts/${id}') }}`,
+                        data: _token,
+                        // dataType: "json",
+                        success: function(response) {
+                            Swal.fire({
+                                title: 'Deleted!',
+                                text: 'Your Post has been deleted.',
+                                imageUrl: "{{ asset('sticker/wink.png') }}",
+                                imageWidth: 200,
+                                imageHeight: 200,
+                                imageAlt: 'Custom image',
+                            })
+                            window.location.href = '/dashboard/posts';
+                            // console.log(json_encode(response));
+                        },
+                        error: function(response) {
+                            swalWithBootstrapButtons.fire(
+                                'Gagal!',
+                                'Data gagal dihapus.',
+                                'error'
+                            )
+                            // console.log(response.responseJSON);
+                        },
+                    });
+
+                } else if (
+                    /* Read more about handling dismissals below */
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire({
+                        title: 'Dibatalkan!',
+                        text: 'Postingan kamu aman.',
+                        imageUrl: "{{ asset('sticker/angel.png') }}",
+                        imageWidth: 200,
+                        imageHeight: 200,
+                        imageAlt: 'Custom image'
+                    })
+                }
+            });
+        });
+    </script>
 @endsection

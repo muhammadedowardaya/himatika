@@ -38,9 +38,12 @@
                             <a href="{{ route('categories.show', $post->category->slug) }}"
                                 class="bg-secondary py-2 px-5 text-decoration-none link-light">{{ $post->category->name }}</a>
                         </div>
-
-                        <img src="https://source.unsplash.com/500x300?{{ $post->category->name }}" id="gambar"
-                            class="card-img-top rounded-3" alt="...">
+                        @if ($post->image)
+                            <img src="{{ asset('post-image') }}}}" id="gambar" class="card-img-top rounded-3" alt="...">
+                        @else
+                            <img src="https://source.unsplash.com/500x300?{{ $post->category->name }}" id="gambar"
+                                class="card-img-top rounded-3" alt="...">
+                        @endif
 
 
                         <div class="card-body">

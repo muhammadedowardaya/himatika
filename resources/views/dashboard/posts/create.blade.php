@@ -41,6 +41,15 @@
                     @enderror
                 </div>
                 <div class="mb-3">
+                    <label for="image" class="form-label">Post Image</label>
+                    <input class="form-control @error('image') is-invalid @enderror" name="image" type="file" id="image">
+                    @error('image')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+                <div class="mb-3">
                     <label for="body" class="form-label">Body</label>
 
                     <input id="body" type="hidden" name="body" class="@error('body') is-invalid @enderror"

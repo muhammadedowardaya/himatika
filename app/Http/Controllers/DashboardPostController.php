@@ -42,8 +42,21 @@ class DashboardPostController extends Controller
     public function store(PostRequest $request)
     {
         $post = $request->all();
-        $post['slug'] = Str::slug($request->title);
+        // buat nama file untuk gambar
+        $fileName = $request->file('image')->getCTime() . '_' . $request->file('image')->getClientOriginalName();
+        // buat slug
+        $slug = Str::slug($request->title);
+        $post['slug'] = $slug . date("s");
+        // cek image
+        if ($request->file('image')) {
+            $image = $fileName;
+            $request->file('image')->storeAs($fileName, 'images/posts', 'public');
+        } else {
+            $image = null;
+        }
+
         $post['user_id'] = auth()->user()->id;
+        $post['image'] = $image;
         Post::create($post);
 
         // $validatedData = $request->validate([
