@@ -49,14 +49,13 @@ class DashboardPostController extends Controller
         $post['slug'] = $slug . date("s");
         // cek image
         if ($request->file('image')) {
-            $image = $fileName;
-            $request->file('image')->storeAs($fileName, 'images/posts', 'public');
+            $post['image'] = $fileName;
+            $request->file('image')->storeAs('images/posts', $fileName, 'public');
         } else {
-            $image = null;
+            $post['image'] = null;
         }
-
         $post['user_id'] = auth()->user()->id;
-        $post['image'] = $image;
+        // dd($post['image']);
         Post::create($post);
 
         // $validatedData = $request->validate([

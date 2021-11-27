@@ -8,8 +8,13 @@
             <div class="col-lg-8">
                 <div class="card w-100 shadow border-0 mb-sm-5 mt-3">
 
-                    <img src="https://source.unsplash.com/500x300?{{ $post->category->name }}"
-                        class="card-img-top img-fluid position-relative" alt="...">
+                    @if ($post->image)
+                        <img src="{{ asset('images/posts/' . $post->image) }}}}"
+                            class="card-img-top img-fluid position-relative" alt="...">
+                    @else
+                        <img src="https://source.unsplash.com/500x300?{{ $post->category->name }}"
+                            class="card-img-top img-fluid position-relative" alt="...">
+                    @endif
 
                     <div class="card-header">
                         <div class="d-flex justify-content-between">
