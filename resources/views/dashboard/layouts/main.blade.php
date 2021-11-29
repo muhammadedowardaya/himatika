@@ -60,19 +60,6 @@
     @yield('script')
 
     <script>
-        const pesan = {
-            berhasil: (text) => {
-                Swal.fire({
-                    imageUrl: "{{ asset('sticker/wink.png') }}",
-                    imageWidth: 200,
-                    imageHeight: 200,
-                    imageAlt: 'Custom image',
-                    title: 'Berhasil!',
-                    text: text
-                });
-            }
-        }
-
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
                 confirmButton: 'btn btn-success',
@@ -80,6 +67,46 @@
             },
             buttonsStyling: false
         })
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            },
+            didClose: () => {
+                window.location.href = '/dashboard/posts';
+            }
+        })
+
+        const Toast_Post = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 4000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        const pesan = {
+            berhasil: (text) => {
+                swalWithBootstrapButtons.fire({
+                    title: 'Berhasil!',
+                    text: text,
+                    imageUrl: "{{ asset('sticker/wink.png') }}",
+                    imageWidth: 200,
+                    imageHeight: 200,
+                    imageAlt: 'Custom image'
+                })
+            }
+        }
     </script>
 
     @if (session('success'))

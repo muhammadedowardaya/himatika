@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="{{ asset('css/bootstrap-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     @yield('css')
-
     <title>Hello, world!</title>
 </head>
 

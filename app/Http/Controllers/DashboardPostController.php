@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PostRequest;
 use App\Models\{Post, Category};
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class DashboardPostController extends Controller
@@ -43,7 +44,7 @@ class DashboardPostController extends Controller
     {
         $post = $request->all();
         // buat nama file untuk gambar
-        $fileName = $request->file('image')->getCTime() . '_' . $request->file('image')->getClientOriginalName();
+        $fileName = date("is") . '_' . $request->file('image')->getClientOriginalName();
         // buat slug
         $slug = Str::slug($request->title);
         $post['slug'] = $slug . date("s");
@@ -71,7 +72,7 @@ class DashboardPostController extends Controller
         // echo 'gebleg';
         // Post::create($validatedData);
         // session()->flash('success', 'pesan.berhasil("New Post has been added!")');
-        return redirect('/dashboard/posts')->with('success', 'pesan.berhasil("New Post has been added!")');
+        return redirect('/dashboard/posts')->with('success', 'pesan.berhasil("Postingan baru berhasil ditambahkan!")');
     }
 
     /**
@@ -113,10 +114,23 @@ class DashboardPostController extends Controller
         // $this->authorize('update', $post);
 
         $attr = $request->all();
-        $attr['slug'] = Str::slug($request->title);
+        $fileName = date("is") . '_' . $request->file('image')->getClientOriginalName();
+        // buat slug
+        $slug = Str::slug($request->title);
+        $attr['slug'] = $slug . date("s");
         $attr['user_id'] = auth()->user()->id;
+        // cek image
+        if ($request->file('image')) {
+            if ($request->oldImage) {
+                Storage::delete('/images/posts/' . $request->oldImage);
+            }
+            $attr['image'] = $fileName;
+            $request->file('image')->storeAs('images/posts', $fileName, 'public');
+        } else {
+            $attr['image'] = null;
+        }
         $post->update($attr);
-        return redirect('/dashboard/posts')->with('success', 'pesan.berhasil("Post has been updated!")');
+        return redirect('/dashboard/posts')->with('success', 'pesan.berhasil("Postingan berhasil diupdate!")');
     }
 
     /**
@@ -127,6 +141,9 @@ class DashboardPostController extends Controller
      */
     public function destroy(Post $post)
     {
+        if ($post->image) {
+            Storage::delete('/images/posts/' . $post->image);
+        }
         Post::destroy($post->id);
         // echo $id;
         // return redirect('/dashboard/posts')->with('success', 'pesan.berhasil("Post has been deleted!")');

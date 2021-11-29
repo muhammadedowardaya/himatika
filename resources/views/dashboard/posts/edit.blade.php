@@ -6,7 +6,7 @@
         <h1 class="h2">Edit Post</h1>
     </div>
 
-    <div class="row">
+    <div class="row mb-3">
         <div class="col-lg-8">
             <form action="{{ route('posts.update', $post->slug) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
@@ -41,15 +41,25 @@
                         </div>
                     @enderror
                 </div>
+
                 <div class="mb-3">
-                    <label for="image" class="form-label">Post Image</label>
-                    <input class="form-control @error('image') is-invalid @enderror" name="image" type="file" id="image">
+                    <label for="image" class="form-label gambar">Post Image</label>
+                    <input type="hidden" name="oldImage" value="{{ $post->image }}">
+                    @if ($post->image)
+                        <img src="{{ asset('storage/images/posts/' . $post->image) }}"
+                            class="img-thumbnail img-fluid img-preview mb-3 col-sm-5 d-block" alt="">
+                    @else
+                        <img src="" class="img-preview img-fluid mb-3 col-sm-5 d-block" alt="">
+                    @endif
+                    <input class="form-control @error('image') is-invalid @enderror" name="image" type="file" id="image"
+                        onchange="previewImg()">
                     @error('image')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
                 </div>
+
                 <div class="mb-3">
                     <label for="body" class="form-label">Body</label>
 
@@ -90,20 +100,18 @@
             e.preventDefault();
         })
 
-        // trixEditor.addEventListener('keydown', function(e) {
-        //     console.log('kamu mencet TAB?');
-        //     if (e.key == 'Tab') {
-        //         e.preventDefault();
+        function previewImg() {
+            const gambar = document.querySelector('#image');
+            const imgPreview = document.querySelector('.img-preview');
 
-        //         var start = trixEditor.selectionStart;
-        //         var end = trixEditor.selectionEnd;
+            gambar.textContent = gambar.files[0].name;
 
-        //         // set textarea value to: text before caret + tab + text after caret
-        //         body.value = body.value.substring(1, start) + "\t" + body.value.substring(end);
+            const fileGambar = new FileReader();
+            fileGambar.readAsDataURL(gambar.files[0]);
 
-        //         // put caret at right position again
-        //         trixEditor.selectionStart = trixEditor.selectionEnd = start + 1;
-        //     }
-        // });
+            fileGambar.onload = function(e) {
+                imgPreview.src = e.target.result;
+            }
+        }
     </script>
 @endsection

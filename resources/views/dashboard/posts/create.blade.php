@@ -41,17 +41,47 @@
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="image" class="form-label">Post Image</label>
-                    <input class="form-control @error('image') is-invalid @enderror" name="image" type="file" id="image">
+                    <label for="image" class="form-label gambar">Post Image</label>
+                    <img src="" class="img-preview img-fluid mb-3 col-sm-5 d-block" alt="">
+                    <input class="form-control @error('image') is-invalid @enderror" name="image" type="file" id="image"
+                        onchange="previewImg()">
                     @error('image')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
                 </div>
+                {{-- <div class="mb-3">
+                    <div class="col-sm-2">Gambar</div>
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <img src="" class="img-thumbnail img-preview" alt="">
+                            </div>
+                            <div class="col-sm-9">
+                                <div>
+                                    <label class="form-label gambar" for="image">Pilih Gambar</label>
+                                    <input type="file" class="form-control  @error('image') is-invalid @enderror" id="image"
+                                        name="image" onchange="previewImg()">
+                                    @error('image')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> --}}
+                {{-- <div class="row mb-3">
+                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Email</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control form-control-sm" id="colFormLabelSm"
+                            placeholder="col-form-label-sm">
+                    </div>
+                </div> --}}
                 <div class="mb-3">
                     <label for="body" class="form-label">Body</label>
-
                     <input id="body" type="hidden" name="body" class="@error('body') is-invalid @enderror"
                         value="{{ old('body') }}">
                     <trix-editor input="body"></trix-editor>
@@ -72,37 +102,29 @@
 
 @section('script')
     <script>
-        // const title = document.querySelector('#title');
-        // const slug = document.querySelector('#slug');
         const trixEditor = document.querySelector('trix-editor');
         const body = document.querySelector('#body');
 
-
-        // title.addEventListener('change', function() {
-        //     fetch('/dashboard/posts/checkSlug?title=' + title.value)
-        //         .then(response => response.json())
-        //         .then(data => slug.value = data.slug)
-        // });
 
         // mematikan fungsi file pada trix editor
         document.addEventListener('trix-file-accept', function(e) {
             e.preventDefault();
         })
 
-        // trixEditor.addEventListener('keydown', function(e) {
-        //     console.log('kamu mencet TAB?');
-        //     if (e.key == 'Tab') {
-        //         e.preventDefault();
+        function previewImg() {
+            const gambar = document.querySelector('#image');
+            const imgPreview = document.querySelector('.img-preview');
 
-        //         var start = trixEditor.selectionStart;
-        //         var end = trixEditor.selectionEnd;
+            gambar.textContent = gambar.files[0].name;
 
-        //         // set textarea value to: text before caret + tab + text after caret
-        //         body.value = body.value.substring(1, start) + "\t" + body.value.substring(end);
+            const fileGambar = new FileReader();
+            fileGambar.readAsDataURL(gambar.files[0]);
 
-        //         // put caret at right position again
-        //         trixEditor.selectionStart = trixEditor.selectionEnd = start + 1;
-        //     }
-        // });
+            fileGambar.onload = function(e) {
+                imgPreview.src = e.target.result;
+            }
+        }
+
+        const labelGambar = document.querySelector('.form-label');
     </script>
 @endsection

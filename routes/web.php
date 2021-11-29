@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{CategoryController, DashboardPostController, PostController};
+use App\Http\Controllers\{AdminCategoryController, CategoryController, DashboardPostController, PostController};
 use App\Http\Controllers\{LoginController, RegisterController};
 
 use App\Models\{User};
@@ -65,6 +65,8 @@ Route::prefix('category')->group(function () {
     Route::get('/{category:slug}', [CategoryController::class, 'show'])->name('categories.show');
 });
 
+// Admin Category
+Route::resource('/dashboard/categories', [AdminCategoryController::class]);
 // Author
 Route::get('authors/{author:username}', function (User $author) {
     return view('posts.index', [

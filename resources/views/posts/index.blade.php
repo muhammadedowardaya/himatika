@@ -33,14 +33,20 @@
                             <a href="/posts?category={{ $posts[0]->category->slug }}"
                                 class="bg-secondary py-2 px-5 text-decoration-none link-light">{{ $posts[0]->category->name }}</a>
                         </div>
-                        <img src="https://source.unsplash.com/1200x400?{{ $posts[0]->category->name }}"
-                            class="card-img-top" alt="...">
+                        @if ($posts[0]->image)
+                            <div
+                                style="background-size:cover;background-position:center;height:300px;background-image:url('{{ asset('storage/images/posts/' . $posts[0]->image) }}')">
+                            </div>
+                        @else
+                            <img src="https://source.unsplash.com/500x300?{{ $posts[0]->category->name }}"
+                                class="card-img-top img-fluid position-relative" alt="...">
+                        @endif
                         <div class="card-body">
                             <p>By : <a href="/posts?author={{ $posts[0]->author->username }}"
                                     class="link-success text-decoration-none">{{ $posts[0]->author->name }}</a>
                             </p>
                             <h3 class="card-title mb-4">{{ $posts[0]->title }}</h3>
-                            <p class="card-text">{{ Str::limit($posts[0]->body, 200) }} <a
+                            <p class="card-text">{{ Str::limit(strip_tags($posts[0]->body), 200) }} <a
                                     href="{{ route('posts.show', $posts[0]->slug) }}">Read More</a></p>
                             <p class="card-text"><small
                                     class="text-muted">{{ $posts[0]->created_at->diffForHumans() }}</small>
@@ -52,14 +58,20 @@
             <div class="row">
                 @foreach ($posts->skip(1) as $post)
                     <div class="col-md-6 col-lg-4 col-xl-3">
-                        <div class="card gerak mb-4 rounded-3 border-0 shadow">
+                        <div class="card gerak mb-4 rounded-3 border-0 shadow" style="min-height:450px">
                             <div class="kategoriLabel" title="category">
                                 <a href="/posts?category={{ $post->category->slug }}"
                                     class="bg-secondary py-2 px-5 text-decoration-none link-light">{{ $post->category->name }}</a>
                             </div>
 
-                            <img src="https://source.unsplash.com/500x300?{{ $post->category->name }}" id="gambar"
-                                class="card-img-top rounded-3" alt="...">
+                            @if ($post->image)
+                                <div
+                                    style="background-size:cover;background-position:center;height:155px;background-image:url('{{ asset('storage/images/posts/' . $post->image) }}')">
+                                </div>
+                            @else
+                                <img src="https://source.unsplash.com/500x300?{{ $post->category->name }}"
+                                    class="card-img-top img-fluid position-relative" alt="...">
+                            @endif
 
                             <div class="card-body">
                                 <p>By : <a href="/posts?author={{ $post->author->username }}"
@@ -68,10 +80,13 @@
                                 <article>
                                     <h3 class="card-title my-3">{{ $post->title }}</h3>
                                     <p class="card-text" style="text-align: justify">
-                                        {{ Str::limit($post->body, 150) }}</p>
+                                        {{ Str::limit(strip_tags($post->body), 120) }}
+                                        <a href="{{ route('posts.show', $post->slug) }}">Read More</a>
+                                    </p>
                                 </article>
-                                <div class="d-flex justify-content-between mt-3">
-                                    <a href="{{ route('posts.show', $post->slug) }}">Read More</a>
+                            </div>
+                            <div class="card-footer">
+                                <div class="d-flex justify-content-between">
                                     <small style="font-size: 12px"
                                         class="mt-1">{{ $post->created_at->diffForHumans() }}</small>
                                 </div>
@@ -88,5 +103,7 @@
 
     </div>
 
-    {{ $posts->links() }}
+    <div class="d-flex justify-content-center">
+        {{ $posts->links() }}
+    </div>
 @endSection()

@@ -2,14 +2,17 @@
     font-family: "LibreBaskerville-Bold";
     src: url(../font/LibreBaskerville-Bold.ttf);
 }
+
 @font-face {
     font-family: "LibreBaskerville-Regular";
     src: url(../font/LibreBaskerville-Regular.ttf);
 }
+
 @font-face {
     font-family: "LibreBaskerville-Italic";
     src: url(../font/LibreBaskerville-Italic.ttf);
 }
+
 
 .card-title,
 .navbar-brand {
@@ -29,6 +32,7 @@
     .card-body {
         font-size: small;
     }
+
     article h3 {
         font-size: large;
     }
@@ -42,6 +46,7 @@
 .kategoriLabel {
     position: absolute;
     left: -250px;
+    z-index: 1;
 }
 
 .kategoriLabel a {

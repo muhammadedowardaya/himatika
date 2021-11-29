@@ -9,8 +9,8 @@
                 <div class="card w-100 shadow border-0 mb-sm-5 mt-3">
 
                     @if ($post->image)
-                        <img src="{{ asset('images/posts/' . $post->image) }}}}"
-                            class="card-img-top img-fluid position-relative" alt="...">
+                        <img src=" {{ asset('storage/images/posts/' . $post->image) }}"
+                            class="card-img-top img-fluid position-relative align-self-center" alt="..." style="width:30vw">
                     @else
                         <img src="https://source.unsplash.com/500x300?{{ $post->category->name }}"
                             class="card-img-top img-fluid position-relative" alt="...">
@@ -94,16 +94,10 @@
                         data: _token,
                         // dataType: "json",
                         success: function(response) {
-                            Swal.fire({
-                                title: 'Deleted!',
-                                text: 'Your Post has been deleted.',
-                                imageUrl: "{{ asset('sticker/wink.png') }}",
-                                imageWidth: 200,
-                                imageHeight: 200,
-                                imageAlt: 'Custom image',
+                            Toast.fire({
+                                icon: 'success',
+                                title: 'Postingan berhasil dihapus!'
                             })
-                            window.location.href = '/dashboard/posts';
-                            // console.log(json_encode(response));
                         },
                         error: function(response) {
                             swalWithBootstrapButtons.fire(

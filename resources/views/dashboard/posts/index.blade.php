@@ -6,48 +6,53 @@
         <h1 class="h2">My Posts</h1>
     </div>
 
-    <div class="table-responsive">
-        <a href="{{ route('posts.create') }}" class="btn btn-primary mb-3">Create New Post</a>
-        <table class="table table-striped table-sm">
-            <thead>
-                <tr>
-                    <th scope="col">No</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($posts as $post)
-                    <tr id="{{ $post->id }}">
-                        <td scope="row">{{ $posts->perPage() * ($posts->currentPage() - 1) + $loop->iteration }}</td>
-                        <td>{{ $post->title }}
-                        <td>{{ $post->category->name }}</td>
-                        <td>
-                            <a href="/dashboard/posts/{{ $post->slug }}" class="badge bg-primary">
-                                <span data-feather="eye"></span>
-                            </a>
-                            <a href="{{ route('posts.edit', $post->slug) }}" class="badge bg-warning">
-                                <span data-feather="edit" stroke-width="2"></span>
-                            </a>
-                            {{-- <form action="{{ route('posts.destroy', $post->slug) }}" method="post" class="d-inline">
-                                @method('delete')
-                                @csrf
-                                <button type="submit" class="badge bg-danger border-0 btnHapus"
-                                    data-slug="{{ $post->slug }}">
-                                    <span data-feather="trash" stroke-width="2"></span>
-                                </button>
-                            </form> --}}
-                            <a class="badge bg-danger border-0 btnHapus" data-slug="{{ $post->slug }}"
-                                data-id="{{ $post->id }}">
-                                <span data-feather="trash" stroke-width="2"></span>
-                            </a>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="table-responsive">
+                <a href="{{ route('posts.create') }}" class="btn btn-primary mb-3">Create New Post</a>
+                <table class="table table-striped table-sm">
+                    <thead>
+                        <tr>
+                            {{-- <th scope="col">No</th> --}}
+                            <th scope="col">Title</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($posts as $post)
+                            <tr id="{{ $post->id }}">
+                                {{-- <td scope="row">{{ $posts->perPage() * ($posts->currentPage() - 1) + $loop->iteration }}</td> --}}
+                                <td>{{ $post->title }}
+                                <td>{{ $post->category->name }}</td>
+                                <td>
+                                    <a href="/dashboard/posts/{{ $post->slug }}" class="badge bg-primary">
+                                        <span data-feather="eye"></span>
+                                    </a>
+                                    <a href="{{ route('posts.edit', $post->slug) }}" class="badge bg-warning">
+                                        <span data-feather="edit" stroke-width="2"></span>
+                                    </a>
+                                    {{-- <form action="{{ route('posts.destroy', $post->slug) }}" method="post" class="d-inline">
+                                        @method('delete')
+                                        @csrf
+                                        <button type="submit" class="badge bg-danger border-0 btnHapus"
+                                            data-slug="{{ $post->slug }}">
+                                            <span data-feather="trash" stroke-width="2"></span>
+                                        </button>
+                                    </form> --}}
+                                    <a class="badge bg-danger border-0 btnHapus" data-slug="{{ $post->slug }}"
+                                        data-id="{{ $post->id }}">
+                                        <span data-feather="trash" stroke-width="2"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
+
 
     {{ $posts->links() }}
 
@@ -97,13 +102,9 @@
                             // dataType: "json",
                             success: function(response) {
                                 $("#" + id).remove();
-                                Swal.fire({
-                                    title: 'Deleted!',
-                                    text: 'Your Post has been deleted.',
-                                    imageUrl: "{{ asset('sticker/wink.png') }}",
-                                    imageWidth: 200,
-                                    imageHeight: 200,
-                                    imageAlt: 'Custom image',
+                                Toast_Post.fire({
+                                    icon: 'success',
+                                    title: 'Postingan berhasil dihapus!'
                                 })
                                 // console.log(json_encode(response));
                             },
