@@ -16,6 +16,7 @@
                             class="card-img-top img-fluid position-relative" alt="...">
                     @endif
 
+                    {{-- @can('update', Post::class) --}}
                     <div class="card-header">
                         <div class="d-flex justify-content-between">
                             <a href="/dashboard/posts" class="btn btn-sm btn-success">
@@ -32,6 +33,7 @@
                             </div>
                         </div>
                     </div>
+                    {{-- @endcan --}}
                     <div class="card-body">
                         <article>
                             <h5 class="card-title my-4">{{ $post->title }}</h5>

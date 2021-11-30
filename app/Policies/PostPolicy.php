@@ -30,7 +30,7 @@ class PostPolicy
      */
     public function view(User $user, Post $post)
     {
-        return $user->id == $post->user_id;
+        return $user->id === $post->user_id;
     }
 
     /**
@@ -51,9 +51,9 @@ class PostPolicy
      * @param  \App\Models\Post  $Post
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Post $Post)
+    public function update(User $user, Post $post)
     {
-        //
+        return $user->id === $post->user_id;
     }
 
     /**

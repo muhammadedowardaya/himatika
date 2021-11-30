@@ -40,10 +40,14 @@
 
 
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+    {{-- <script src="{{ asset('js/bootstrap.min.js') }}"></script> --}}
+    {{-- <script src="{{ asset('js/gsap.min.js') }}"></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
+    {{-- <script src="{{ asset('js/EaselPlugin.min.js') }}"></script> --}}
     <script src="{{ asset('js/feather.min.js') }}"></script>
     <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
-    <script src="{{ asset('js/script_dashboard.js') }}"></script>
+    {{-- <script src="{{ asset('js/dashboard.js') }}"></script> --}}
     {{-- <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
         integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous">
     </script> --}}
@@ -56,8 +60,7 @@
     <script>
         feather.replace()
     </script>
-    {{-- Untuk javascript --}}
-    @yield('script')
+
 
     <script>
         const swalWithBootstrapButtons = Swal.mixin({
@@ -114,6 +117,9 @@
             {!! session('success') !!}
         </script>
     @endif
+
+    {{-- Untuk javascript --}}
+    @yield('script')
 </body>
 
 </html>

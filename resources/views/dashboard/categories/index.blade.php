@@ -9,7 +9,11 @@
     <div class="row">
         <div class="col-lg-6">
             <div class="table-responsive">
-                <a href="{{ route('categories.create') }}" class="btn btn-primary mb-3">Create New Category</a>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary mb-4" id="btnCategory" data-bs-toggle="modal"
+                    data-bs-target="#categoryModal">
+                    Create New Category
+                </button>
                 <table class="table table-striped table-sm">
                     <thead>
                         <tr>
@@ -24,12 +28,11 @@
                                 {{-- <td scope="row">{{ $posts->perPage() * ($posts->currentPage() - 1) + $loop->iteration }}</td> --}}
                                 <td>{{ $category->name }}</td>
                                 <td>
-                                    <a href="/dashboard/categories/{{ $category->slug }}" class="badge bg-primary">
-                                        <span data-feather="eye"></span>
-                                    </a>
-                                    <a href="{{ route('categories.edit', $category->slug) }}" class="badge bg-warning">
+                                    <button id="btnEditCategory" class="badge bg-warning border-0"
+                                        data-slug="{{ $category->slug }}" data-name="{{ $category->name }}"
+                                        data-bs-toggle="modal" data-bs-target="#categoryModal">
                                         <span data-feather="edit" stroke-width="2"></span>
-                                    </a>
+                                    </button>
                                     {{-- <form action="{{ route('categories.destroy', $category->slug) }}" method="category" class="d-inline">
                                         @method('delete')
                                         @csrf
@@ -53,6 +56,46 @@
 
 
     {{-- {{ $categories->links() }} --}}
+
+    {{-- Modal create new category --}}
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="categoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="categoryModalLabel">Add New Category</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('categories.store') }}" method="post" enctype="multipart/form-data" id="form">
+                    <div class="modal-body">
+                        {{ csrf_field() }}
+                        {{-- @if ($errors->any())
+                            @foreach ($errors->all() as $error)
+                                {{ $error }}
+                            @endforeach
+                        @endif --}}
+                        <input type="hidden" name="_method" value="post" id="method">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Category Name</label>
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
+                                value="{{ old('name') }}" name="name">
+                            @error('name')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" id="btnAddCategory" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 @endsection
 
@@ -95,14 +138,14 @@
                         // };
                         $.ajax({
                             type: "delete",
-                            // url: `{{ url('dashboard/categories/${id}') }}`,
+                            url: `{{ url('dashboard/categories/${id}') }}`,
                             data: _token,
                             // dataType: "json",
                             success: function(response) {
                                 $("#" + id).remove();
                                 Toast_Post.fire({
                                     icon: 'success',
-                                    title: 'Postingan berhasil dihapus!'
+                                    title: 'Kategori berhasil dihapus!'
                                 })
                                 // console.log(json_encode(response));
                             },
@@ -132,5 +175,54 @@
                 });
             });
         });
+
+        // tombol tambah kategori modal
+        const btnCategory = document.querySelector('#btnCategory');
+        // kategori modal
+        const categoryModal = document.querySelector('#categoryModal');
+        // tombol submit add
+        const btnAddCategory = document.querySelector('#btnAddCategory');
+        // tombol edit
+        const btnEditCategory = document.querySelectorAll('#btnEditCategory');
+
+        btnCategory.addEventListener('click', function() {
+            gsap.fromTo(categoryModal, {
+                duration: 2,
+                ease: "elastic.out(1, 0.3)",
+                y: -50
+            }, {
+                duration: 2,
+                ease: "elastic.out(1, 0.3)",
+                y: 70
+            });
+        });
+
+        btnEditCategory.forEach(update => {
+            update.addEventListener('click', function() {
+                // tambahkan animasi
+                gsap.fromTo(categoryModal, {
+                    duration: 2,
+                    ease: "elastic.out(1, 0.3)",
+                    y: -50
+                }, {
+                    duration: 2,
+                    ease: "elastic.out(1, 0.3)",
+                    y: 70
+                });
+
+                btnAddCategory.innerHTML = 'Update Category';
+                document.querySelector('#categoryModalLabel').innerHTML = 'Update Category Name';
+                // <meta name="csrf-token" content="{{ csrf_token() }}">
+                const name = update.getAttribute('data-name');
+                const slug = update.getAttribute('data-slug');
+
+                $('#name').val(name);
+
+                const _token = $('meta[name="csrf-token"]').attr('content');
+                $("#method").val("PATCH");
+                $("#form").attr('action', `{{ url('dashboard/categories/${slug}') }}`);
+
+            })
+        })
     </script>
 @endsection
