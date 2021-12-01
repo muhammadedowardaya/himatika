@@ -29,6 +29,7 @@ class DashboardPostController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Post::class);
         return view('dashboard.posts.create', [
             'categories' => Category::all()
         ]);
@@ -42,6 +43,7 @@ class DashboardPostController extends Controller
      */
     public function store(PostRequest $request)
     {
+        $this->authorize('create', Post::class);
         $post = $request->all();
         // buat nama file untuk gambar
         $fileName = date("is") . '_' . $request->file('image')->getClientOriginalName();
@@ -83,6 +85,7 @@ class DashboardPostController extends Controller
      */
     public function show(Post $post)
     {
+        $this->authorize('view', $post);
         return view('dashboard.posts.show', [
             'post' => $post
         ]);
@@ -96,6 +99,7 @@ class DashboardPostController extends Controller
      */
     public function edit(Post $post)
     {
+        $this->authorize('update', $post);
         return view('dashboard.posts.edit', [
             'categories' => Category::all(),
             'post' => $post
@@ -111,23 +115,23 @@ class DashboardPostController extends Controller
      */
     public function update(PostRequest $request, Post $post)
     {
-        // $this->authorize('update', $post);
+        $this->authorize('update', $post);
 
         $attr = $request->all();
-        $fileName = date("is") . '_' . $request->file('image')->getClientOriginalName();
         // buat slug
         $slug = Str::slug($request->title);
         $attr['slug'] = $slug . date("s");
         $attr['user_id'] = auth()->user()->id;
         // cek image
         if ($request->file('image')) {
+            $fileName = date("is") . '_' . $request->file('image')->getClientOriginalName();
             if ($request->oldImage) {
                 Storage::delete('/images/posts/' . $request->oldImage);
             }
             $attr['image'] = $fileName;
             $request->file('image')->storeAs('images/posts', $fileName, 'public');
         } else {
-            $attr['image'] = null;
+            $attr['image'] = $request->oldImage;
         }
         $post->update($attr);
         return redirect('/dashboard/posts')->with('success', 'pesan.berhasil("Postingan berhasil diupdate!")');
@@ -141,6 +145,7 @@ class DashboardPostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $this->authorize('delete', $post);
         if ($post->image) {
             Storage::delete('/images/posts/' . $post->image);
         }

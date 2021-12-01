@@ -6,13 +6,31 @@
             <div class="col-md-8">
                 <div class="card w-100 shadow border-0 mb-sm-5">
                     @if ($post->image)
-                        <div
-                            style="background-size:cover;background-position:center;height:500px;background-image:url('{{ asset('storage/images/posts/' . $post->image) }}')">
-                        </div>
+                        <img src=" {{ asset('storage/images/posts/' . $post->image) }}"
+                            class="card-img-top img-fluid position-relative align-self-center" alt="..." style="width:30vw">
                     @else
-                        <img src="https://source.unsplash.com/500x300?{{ $post->category->name }}" id="gambar"
-                            class="card-img-top rounded-3" alt="...">
+                        <img src="https://source.unsplash.com/500x300?{{ $post->category->name }}"
+                            class="card-img-top img-fluid position-relative" alt="...">
                     @endif
+
+                    @can('update', $post)
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between">
+                                <a href="/dashboard/posts" class="btn btn-sm btn-success">
+                                    <span data-feather="arrow-left"></span> Back to All My Posts
+                                </a>
+                                <div>
+                                    <a href="{{ route('posts.edit', $post->slug) }}" class="btn btn-sm btn-warning text-dark">
+                                        <span data-feather="edit"></span> Edit
+                                    </a>
+                                    <a class="btn btn-danger btn-sm btnHapus" data-slug="{{ $post->slug }}"
+                                        data-id="{{ $post->id }}">
+                                        <span data-feather="trash" stroke-width="2"></span> Hapus
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    @endcan
                     <div class="card-body">
                         <p>By : <a href="/authors/{{ $post->author->username }}"
                                 class="link-success text-decoration-none">{{ $post->author->name }}</a>

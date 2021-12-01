@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\{User, Post};
+use App\Policies\PostPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -14,7 +15,9 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Models\Post' => 'App\Policies\PostPolicy',
+        // 'App\Models\Post' => 'App\Policies\PostPolicy',
+        Post::class => PostPolicy::class,
+
     ];
 
     /**
@@ -26,11 +29,12 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        // Gate::define('admin', function (User $user) {
-        //     return $user->is_admin;
-        // });
+        Gate::define('admin', function (User $user) {
+            return $user->is_admin;
+        });
 
         // Gate::define('user', function (User $user, Post $post) {
+        //     // $data = Post::findOrFail($post->id);
         //     return $user->id === $post->user_id;
         // });
     }

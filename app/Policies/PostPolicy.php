@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
 
 class PostPolicy
 {
@@ -18,7 +19,7 @@ class PostPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->id === auth()->user()->id;
     }
 
     /**
@@ -30,7 +31,9 @@ class PostPolicy
      */
     public function view(User $user, Post $post)
     {
-        return $user->id === $post->user_id;
+        return $user->id === $post->user_id
+            ? Response::allow()
+            : Response::deny('You do not own this post.');
     }
 
     /**
@@ -41,7 +44,7 @@ class PostPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user;
     }
 
     /**
@@ -53,7 +56,9 @@ class PostPolicy
      */
     public function update(User $user, Post $post)
     {
-        return $user->id === $post->user_id;
+        return $user->id === $post->user_id
+            ? Response::allow()
+            : Response::deny('You do not own this post.');
     }
 
     /**
@@ -63,9 +68,11 @@ class PostPolicy
      * @param  \App\Models\Post  $Post
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Post $Post)
+    public function delete(User $user, Post $post)
     {
-        //
+        return $user->id === $post->user_id
+            ? Response::allow()
+            : Response::deny('You do not own this post.');
     }
 
     /**
