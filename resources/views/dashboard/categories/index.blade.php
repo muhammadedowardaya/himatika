@@ -19,6 +19,7 @@
                         <tr>
                             {{-- <th scope="col">No</th> --}}
                             <th scope="col">Category Name</th>
+                            <th scope="col">Category Image</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -27,6 +28,14 @@
                             <tr id="{{ $category->id }}">
                                 {{-- <td scope="row">{{ $posts->perPage() * ($posts->currentPage() - 1) + $loop->iteration }}</td> --}}
                                 <td>{{ $category->name }}</td>
+                                <td>
+                                    @if ($category->image == null)
+                                        No Image
+                                    @else
+                                        <img src="{{ asset('storage/images/categories/' . $category->image) }}" alt=""
+                                            class="img-fluid img-thumbnail" width="80px">
+                                    @endif
+                                </td>
                                 <td>
                                     <button id="btnEditCategory" class="badge bg-warning border-0"
                                         data-slug="{{ $category->slug }}" data-name="{{ $category->name }}"
@@ -62,7 +71,7 @@
 
     <!-- Modal -->
     <div class="modal fade" id="categoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="categoryModalLabel">Add New Category</h5>
@@ -77,11 +86,23 @@
                             @endforeach
                         @endif --}}
                         <input type="hidden" name="_method" value="post" id="method">
+                        <input type="hidden" name="oldImage" value="{{ $category->image ?? '' }}" id="oldImage">
                         <div class="mb-3">
                             <label for="name" class="form-label">Category Name</label>
                             <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
                                 value="{{ old('name') }}" name="name">
                             @error('name')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="image" class="form-label gambar">Post Image</label>
+                            <img src="" class="img-preview img-fluid mb-3 col-sm-5 d-block" alt="">
+                            <input class="form-control @error('image') is-invalid @enderror" name="image" type="file"
+                                id="image" onchange="previewImg()">
+                            @error('image')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -189,12 +210,14 @@
             gsap.fromTo(categoryModal, {
                 duration: 2,
                 ease: "elastic.out(1, 0.3)",
-                y: -50
+                y: -70
             }, {
                 duration: 2,
                 ease: "elastic.out(1, 0.3)",
-                y: 70
+                y: -10
             });
+            $('#name').val('');
+            $('.img-preview').attr('src', '');
         });
 
         btnEditCategory.forEach(update => {
@@ -203,11 +226,11 @@
                 gsap.fromTo(categoryModal, {
                     duration: 2,
                     ease: "elastic.out(1, 0.3)",
-                    y: -50
+                    y: -70
                 }, {
                     duration: 2,
                     ease: "elastic.out(1, 0.3)",
-                    y: 70
+                    y: -10
                 });
 
                 btnAddCategory.innerHTML = 'Update Category';
@@ -222,7 +245,38 @@
                 $("#method").val("PATCH");
                 $("#form").attr('action', `{{ url('dashboard/categories/${slug}') }}`);
 
+                const imgPreview = document.querySelector('.img-preview');
+
+                const json = {
+                    "slug": slug
+                }
+
+                // ganti gambar
+                $.ajax({
+                    type: "post",
+                    url: `{{ route('categories.getUbah') }}`,
+                    data: JSON.stringify(json),
+                    dataType: "json",
+                    success: function(response) {
+                        $('.img-preview').attr('src', response);
+                    }
+                });
+
             })
         })
+
+        function previewImg() {
+            const gambar = document.querySelector('#image');
+            const imgPreview = document.querySelector('.img-preview');
+
+            gambar.textContent = gambar.files[0].name;
+
+            const fileGambar = new FileReader();
+            fileGambar.readAsDataURL(gambar.files[0]);
+
+            fileGambar.onload = function(e) {
+                imgPreview.src = e.target.result;
+            }
+        }
     </script>
 @endsection

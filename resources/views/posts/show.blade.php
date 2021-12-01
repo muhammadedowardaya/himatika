@@ -1,13 +1,16 @@
 @extends('layouts.posts.main')
 
+@section('title', 'Himatika | Blog')
+
 @section('content')
     <div class="container">
         <div class="row my-3">
             <div class="col-md-8">
                 <div class="card w-100 shadow border-0 mb-sm-5">
                     @if ($post->image)
-                        <img src=" {{ asset('storage/images/posts/' . $post->image) }}"
-                            class="card-img-top img-fluid position-relative align-self-center" alt="..." style="width:30vw">
+                        <div
+                            style="background-size:cover;background-position:center;height:500px;background-image:url('{{ asset('storage/images/posts/' . $post->image) }}')">
+                        </div>
                     @else
                         <img src="https://source.unsplash.com/500x300?{{ $post->category->name }}"
                             class="card-img-top img-fluid position-relative" alt="...">

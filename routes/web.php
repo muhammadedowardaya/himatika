@@ -67,6 +67,7 @@ Route::prefix('category')->group(function () {
 
 // Admin Category
 Route::resource('/dashboard/categories', AdminCategoryController::class)->except('show');
+Route::post('/dashboard/categories/getUbah', [AdminCategoryController::class, 'getUbah'])->name('categories.getUbah');
 // Author
 Route::get('authors/{author:username}', function (User $author) {
     return view('posts.index', [

@@ -1,5 +1,6 @@
 @extends('layouts.posts.main')
 
+@section('title', 'Himatika | Blog')
 @section('content')
     <div class="container">
         <div class="row text-center">
