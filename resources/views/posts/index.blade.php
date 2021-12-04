@@ -9,7 +9,7 @@
 @section('content')
     <div class="container">
         <div class="row text-center">
-            <div class="col mt-4">
+            <div class="col mt-4 text-light">
                 <h1>{!! $title !!}</h1>
             </div>
         </div>

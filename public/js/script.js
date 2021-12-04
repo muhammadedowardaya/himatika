@@ -10,7 +10,7 @@ cards.forEach((card) => {
 
         gsap.to(".show_label", {
             ease: "expo.outout",
-            x: 250,
+            xPercent: 80,
             onComplete: function () {
                 label.classList.remove("show_label");
             },
@@ -24,7 +24,7 @@ cards.forEach((card) => {
 
         gsap.to(".off_label", {
             ease: "expo.outout",
-            x: -250,
+            xPercent: -80,
             onComplete: function () {
                 label.classList.remove("off_label");
             },

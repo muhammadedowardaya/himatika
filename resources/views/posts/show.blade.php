@@ -55,7 +55,8 @@
                 </div>
             </div>
             <div class="col-sm-12 justify-content-center my-sm-3 d-md-none d-lg-none d-xl-none d-xxl-none">
-                <h4 style="font-family: LibreBaskerville-Italic;" class="my-4">Mungkin kamu ingin membaca artikel
+                <h4 style="font-family: LibreBaskerville-Italic;" class="my-4 text-light">Mungkin kamu tertarik untuk
+                    membaca artikel
                     berikut : </h4>
             </div>
             <div class="col-md-4">

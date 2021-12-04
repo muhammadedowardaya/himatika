@@ -1,0 +1,275 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --totalLi: 5;
+    --minusTotalLi: -5;
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #07252d;
+}
+
+h2.text-himatika {
+    position: fixed;
+    top: 43%;
+    font-size: 5em;
+    color: #0e3742;
+    text-transform: uppercase;
+    width: 100%;
+    text-align: center;
+    -webkit-box-reflect: below -42px linear-gradient(transparent, #0004);
+    -moz-box-reflect: below -42px linear-gradient(transparent, #0004);
+    z-index: 10;
+}
+
+h2.text-himatika span {
+    animation: animate 7s linear infinite;
+}
+
+h2.text-himatika span:nth-child(1) {
+    animation-delay: 0.1s
+}
+
+h2.text-himatika span:nth-child(2) {
+    animation-delay: 0.1s
+}
+
+h2.text-himatika span:nth-child(3) {
+    animation-delay: 0.4s
+}
+
+h2.text-himatika span:nth-child(4) {
+    animation-delay: 0.6s
+}
+
+
+@keyframes animate {
+
+    0%,
+    18%,
+    20%,
+    50.1%,
+    60%,
+    65.1%,
+    80%,
+    90.1%,
+    92% {
+        color: #0e3742;
+        text-shadow: none;
+    }
+
+    18.1%,
+    20.1%,
+    30%,
+    50%,
+    60.1%,
+    65%,
+    80.1%,
+    90%,
+    92.1%,
+    100% {
+        color: #fff;
+        text-shadow: 0 0 10px #03bcf4,
+            0 0 20px #03bcf4,
+            0 0 40px #03bcf4,
+            0 0 80px #03bcf4,
+            0 0 160px #03bcf4,
+            0 0 400px #03bcf4;
+    }
+}
+
+/* Button Start */
+
+.button-start {
+    opacity: 1;
+    position: fixed;
+    top: 70%;
+    z-index: 10;
+}
+
+a.btn {
+    position: relative;
+    padding: 10px 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    margin: 40px;
+    transition: 1s;
+    overflow: hidden;
+    text-decoration: none;
+    -webkit-box-reflect: below 1px linear-gradient(transparent, transparent, #0004);
+}
+
+a.btn:hover {
+    background: var(--clr);
+    box-shadow: 0 0 10px var(--clr),
+        0 0 30px var(--clr),
+        0 0 50px var(--clr),
+        0 0 100px var(--clr);
+}
+
+a.btn::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 400%;
+    background: var(--clr);
+    transition: 1s;
+    animation: animateButton 2s linear infinite;
+    animation-delay: calc(0.33s * var(--i));
+}
+
+a.btn:hover::before {
+    width: 80%;
+}
+
+@keyframes animateButton {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+a.btn::after {
+    content: '';
+    position: absolute;
+    background: #07252d;
+    inset: 4px;
+}
+
+a.btn:hover::after {
+    background: var(--clr);
+}
+
+a.btn span {
+    position: relative;
+    z-index: 1;
+    font-size: 1em;
+    color: #fff;
+    opacity: 0.5;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    transition: 0.5s;
+}
+
+a.btn:hover span {
+    opacity: 1;
+}
+
+/* Circular Menu--------------------------------------------------------------------------------- */
+.container-menu {
+    position: fixed;
+    z-index: 1;
+    bottom: 46px;
+    opacity: 0;
+}
+
+.menu {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    /* background: #0f0;  */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu li {
+    position: absolute;
+    left: 0;
+    list-style: none;
+    transform-origin: 100px;
+    transition: 0.5s;
+    transition-delay: calc(0.1s * var(--i));
+    transform: rotate(0deg) translateX(80px);
+}
+
+.menu.active li {
+    transform: rotate(calc(350deg / var(--totalLi) * var(--i)));
+}
+
+.menu li a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    border-radius: 50%;
+    transform: rotate(calc(350deg / var(--minusTotalLi) * var(--i)));
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+    color: #111;
+    transition: 0.5s;
+}
+
+.menu li a:hover {
+    color: #ff1252;
+}
+
+.toggle {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+    font-size: 2em;
+    transition: transform 1.25s;
+}
+
+.menu.active .toggle {
+    transform: rotate(360deg);
+}
+
+/* punya sendiri */
+.menu .toggle img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+/* container content */
+.container-content {
+    color: #fff;
+    margin: 30px;
+    align-self: flex-start;
+    display: none;
+    opacity: 0
+}
+
+.d-flex {
+    display: flex;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.text-center {
+    text-align: center;
+}
