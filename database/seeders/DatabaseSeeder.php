@@ -18,10 +18,11 @@ class DatabaseSeeder extends Seeder
             'name' => 'Muhammad Edo Wardaya',
             'username' => 'Edo',
             'email' => 'muhammadedowarday4@gmail.com',
-            'password' => bcrypt('password')
+            'password' => bcrypt('303warday4'),
+            'is_admin' => 1
         ]);
-        User::factory(3)->create();
-        Post::factory(20)->create();
+        // User::factory(3)->create();
+        // Post::factory(20)->create();
 
         Category::create([
             'name' => 'Event',

@@ -36,8 +36,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link{{ request()->is('dashboard/categories*') ? ' active' : '' }}"
-                        href="/dashboard/categories">
+                    <a class="nav-link{{ request()->is('/') ? ' active' : '' }}" href="/">
                         <span data-feather="grid"></span>
                         Himatika Profile
                     </a>
