@@ -1,6 +1,7 @@
 $(document).ready(function () {
     gsap.from('.button-start', {
         duration: 3,
+        display: "none",
         scale: 0.1,
         y: -390,
         rotationY: 720,
@@ -28,7 +29,7 @@ $(document).ready(function () {
                 gsap.to('h2.text-himatika', {
                     duration: 2.5,
                     scale: 0.3,
-                    y: 260,
+                    y: 278,
                     ease: "circ.out",
                     onComplete: () => {
                         gsap.to('.container-menu', {
@@ -36,34 +37,31 @@ $(document).ready(function () {
                             duration: 2,
                             rotationY: 360,
                             ease: "power1.out",
-                            bottom: 5
+                            bottom: 0,
+                            onComplete: () => {
+                                masterTl.restart().delay(1);
+                                gsap.to('.container-content', {
+                                    duration: 4,
+                                    ease: "power1.out",
+                                    display: "inline-block",
+                                    opacity: 1
+                                }).delay(1);
+                            }
                         })
+
                         gsap.to('.container-content', {
-                            duration: 2,
+                            duration: 3,
                             ease: "power1.out",
                             display: "inline-block",
                             opacity: 1
-                        })
+                        }).delay(1);
                     }
-                });
+                }).delay(1);
             }
         });
 
     }
 
-    // ubah angka pada rotate circular menu
-    // Get the root element
-    var r = document.querySelector(':root');
 
-
-    // Get the styles (properties and values) for the root
-    var rs = getComputedStyle(r);
-    // get
-    // rs.getPropertyValue('--blue');
-    // set
-    r.style.setProperty('--totalLi', (menu.childElementCount - 1));
-    r.style.setProperty('--minusTotalLi', '-' + (menu.childElementCount - 1));
-    const minusTotalLi = rs.getPropertyValue('--minusTotalLi');
-    console.log(minusTotalLi);
 
 })

@@ -64,7 +64,8 @@
             <div class="row">
                 @foreach ($posts->skip(1) as $post)
                     <div class="col-md-6 col-lg-4 col-xl-3">
-                        <div class="card gerak mb-4 rounded-3 border-0 shadow" style="min-height:450px">
+                        <div class="card gerak mb-4 rounded-3 border-0 shadow-lg bg-dark"
+                            style="min-height:450px;color:#fff;">
                             <div class="kategoriLabel" title="category">
                                 <a href="/posts?category={{ $post->category->slug }}"
                                     class="bg-secondary py-2 px-5 text-decoration-none link-light">{{ $post->category->name }}</a>

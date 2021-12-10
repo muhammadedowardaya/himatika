@@ -1,7 +1,5 @@
-@extends('layouts.main')
-
-@section('content')
-    <h1 class="text-center">HIMATIKA</h1>
+<div class="container">
+    <h1 class="text-center mt-5">HIMATIKA</h1>
     <div class="row">
         <div class="col-lg-8 offset-lg-2">
             <h2 class="my-3">VISI</h2>
@@ -25,5 +23,4 @@
             </p>
         </div>
     </div>
-
-@endsection
+</div>

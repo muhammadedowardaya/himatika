@@ -24,6 +24,11 @@ class DatabaseSeeder extends Seeder
         Post::factory(20)->create();
 
         Category::create([
+            'name' => 'Event',
+            'slug' => 'event'
+        ]);
+
+        Category::create([
             'name' => 'Programming',
             'slug' => 'programming'
         ]);

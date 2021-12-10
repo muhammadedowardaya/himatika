@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\{AdminCategoryController, CategoryController, DashboardPostController, PostController};
+use App\Http\Controllers\{AdminCategoryController, CategoryController, DashboardPostController, HimatikaController, PostController};
 use App\Http\Controllers\{LoginController, RegisterController};
 
-use App\Models\{User};
+use App\Models\{Category, User, Post};
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,13 +18,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('himatika.home');
-});
+
+// Himatika Profile
+Route::get('/', [HimatikaController::class, 'index'])->name('himatika.index');
 
 Route::get('/about', function () {
-    return view('about');
-});
+    return view('himatika.about');
+})->name('himatika.about');
+
+Route::get('/organization', function () {
+    return view('himatika.organization');
+})->name('himatika.organization');
+
+Route::get('/post/{category:name}', [HimatikaController::class, 'event'])->name('himatika.event');
+
 
 // Login--------------------------------
 Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->name('login');

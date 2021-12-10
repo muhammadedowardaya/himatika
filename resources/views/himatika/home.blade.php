@@ -1,37 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.main')
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Name</title>
+@section('css')
     <style>
-        /* nama_saya.php */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            display: flex;
-            align-items: center;
-            min-height: 100vh;
-            background: #00050a;
-            color: #eeeeee;
-        }
-
-        h1 {
-            position: relative;
-            font-family: "lato", sans-serif;
+        h1.typingHimatika {
+            position: absolute !important;
+            left: 3%;
+            top: 42%;
+            /* font-family: "lato", sans-serif; */
             font-size: 3vw;
             font-weight: bold;
             padding-left: 10vw;
             overflow: hidden;
         }
 
-        h1 .box {
+        h1.typingHimatika .box {
             position: absolute;
             bottom: 0;
             display: inline-block;
@@ -41,25 +23,24 @@
             width: 100px;
         }
 
-        h1 .hi {
+        h1.typingHimatika .hi {
             display: inline-block;
             text-shadow: 1px 1px 2px black;
         }
 
     </style>
-</head>
+@endsection
 
-<body>
-
-    <h1>
+@section('content')
+    <h1 class="typingHimatika">
         <span class="box"></span>
         <span class="hi text-white">HIMATIKA,</span>
         <span class="text"></span>
         <span class="cursor">_</span>
     </h1>
+@endsection
 
-
-
+@section('script')
     <script src="{{ asset('js/gsap.min.js') }}"></script>
     <script src="{{ asset('js/TextPlugin.min.js') }}"></script>
     <script src="{{ asset('js/EasePack.min.js') }}"></script>
@@ -71,10 +52,9 @@
 
         const words = [
             "Himpunan Mahasiswa Informatika",
-            "Menjadi Himpunan Mahasiswa",
-            "yang Islami,",
+            "Himpunan Mahasiswa yang Islami,",
             "Cerdas",
-            "dan Mandiri",
+            "dan Mandiri.",
         ];
 
         let cursor = gsap.to(".cursor", {
@@ -88,7 +68,7 @@
         boxTL
             .to(".box", {
                 duration: 2,
-                width: "21vw",
+                width: "15vw",
                 delay: 0.5,
                 ease: "power4.inOut",
             })
@@ -128,6 +108,4 @@
             masterTl.add(tl);
         });
     </script>
-</body>
-
-</html>
+@endsection
