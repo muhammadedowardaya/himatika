@@ -12,7 +12,32 @@ body {
     left: -80%;
 }
 
+.kategoriLabel {
+    z-index: 1;
+}
+
+.card-title {
+    font-size: 2rem;
+}
+
 .card.gerak {
     overflow: hidden;
     color: black;
+    min-height: 450px;
+    color: #fff;
+    box-shadow: 0 0 0px 4px white !important;
+    border-radius: 0 !important;
+    background: #2b3b52 !important;
+}
+
+@media (min-width:1200px) {
+    .card-title {
+        font-size: 1.3rem;
+    }
+}
+
+@media (min-width:768px) {
+    .card-title {
+        font-size: 1.2rem;
+    }
 }

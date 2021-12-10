@@ -25,7 +25,7 @@
                         @if (request('author'))
                             <input type="hidden" name="author" value="{{ request('author') }}">
                         @endif
-                        <button class="btn btn-primary" type="submit">Search</button>
+                        <button class="btn btn-secondary" type="submit">Search</button>
                     </div>
                 </form>
             </div>
@@ -34,10 +34,10 @@
         @if (isset($posts[0]) && isset($posts))
             <div class="row mb-2">
                 <div class="col">
-                    <div class="card gerak mb-3 text-sm-left text-md-center text-lg-center text-xl-center shadow border-0">
+                    <div class="card gerak mb-3 text-sm-left text-md-center text-lg-center text-xl-center">
                         <div class="kategoriLabel" title="category">
                             <a href="/posts?category={{ $posts[0]->category->slug }}"
-                                class="bg-secondary py-2 px-5 text-decoration-none link-light">{{ $posts[0]->category->name }}</a>
+                                class="bg-secondary text-white py-2 px-5 text-decoration-none">{{ $posts[0]->category->name }}</a>
                         </div>
                         @if ($posts[0]->image)
                             <div
@@ -48,14 +48,13 @@
                                 class="card-img-top img-fluid position-relative" alt="...">
                         @endif
                         <div class="card-body">
-                            <p>By : <a href="/posts?author={{ $posts[0]->author->username }}"
-                                    class="link-success text-decoration-none">{{ $posts[0]->author->name }}</a>
+                            <p>By : <a href="/posts?author={{ $posts[0]->author->username }}" class="link-light"
+                                    style="font-size:0.9em;">{{ $posts[0]->author->name }}</a>
                             </p>
                             <h3 class="card-title mb-4">{{ $posts[0]->title }}</h3>
                             <p class="card-text">{{ Str::limit(strip_tags($posts[0]->body), 200) }} <a
                                     href="{{ route('posts.show', $posts[0]->slug) }}">Read More</a></p>
-                            <p class="card-text"><small
-                                    class="text-muted">{{ $posts[0]->created_at->diffForHumans() }}</small>
+                            <p class="card-text"><small>{{ $posts[0]->created_at->diffForHumans() }}</small>
                             </p>
                         </div>
                     </div>
@@ -64,8 +63,7 @@
             <div class="row">
                 @foreach ($posts->skip(1) as $post)
                     <div class="col-md-6 col-lg-4 col-xl-3">
-                        <div class="card gerak mb-4 rounded-3 border-0 shadow-lg bg-dark"
-                            style="min-height:450px;color:#fff;">
+                        <div class="card gerak mb-4 " style="min-height:450px;color:#fff;">
                             <div class="kategoriLabel" title="category">
                                 <a href="/posts?category={{ $post->category->slug }}"
                                     class="bg-secondary py-2 px-5 text-decoration-none link-light">{{ $post->category->name }}</a>
@@ -81,14 +79,15 @@
                             @endif
 
                             <div class="card-body">
-                                <p>By : <a href="/posts?author={{ $post->author->username }}"
-                                        class="link-success text-decoration-none">{{ $post->author->name }}</a>
+                                <p>By : <a href="/posts?author={{ $post->author->username }}" class="link-light"
+                                        style="font-size:0.9em;">{{ $post->author->name }}</a>
                                 </p>
                                 <article>
                                     <h3 class="card-title my-3">{{ $post->title }}</h3>
                                     <p class="card-text" style="text-align: justify">
                                         {{ Str::limit(strip_tags($post->body), 120) }}
-                                        <a href="{{ route('posts.show', $post->slug) }}">Read More</a>
+                                        <a href="{{ route('posts.show', $post->slug) }}">Read
+                                            More</a>
                                     </p>
                                 </article>
                             </div>

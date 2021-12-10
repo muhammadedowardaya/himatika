@@ -33,6 +33,13 @@
 
     <script type="text/javascript">
         var BASE = "<?php url(); ?>";
+        // untuk bagian struktur organisasi
+        const orgCard = document.querySelectorAll('.orgCard');
+        orgCard.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault()
+            })
+        })
     </script>
 
 </body>

@@ -6,7 +6,9 @@
     <div class="container">
         <div class="row my-3">
             <div class="col-md-8">
-                <div class="card w-100 shadow border-0 mb-sm-5">
+                <div class="card .gerak w-100 shadow border-0 mb-sm-5" style="box-shadow: 0 0 0px 4px white !important;
+                                border-radius: 0 !important;
+                                background: #2b3b52 !important;">
                     @if ($post->image)
                         <div
                             style="background-size:cover;background-position:center;height:500px;background-image:url('{{ asset('storage/images/posts/' . $post->image) }}')">
@@ -35,8 +37,8 @@
                         </div>
                     @endcan
                     <div class="card-body">
-                        <p>By : <a href="/authors/{{ $post->author->username }}"
-                                class="link-success text-decoration-none">{{ $post->author->name }}</a>
+                        <p style="font-size:0.9em;">By : <a href="/authors/{{ $post->author->username }}"
+                                class="link-light text-decoration-none">{{ $post->author->name }}</a>
                         </p>
                         <article>
                             <h5 class="card-title my-4">{{ $post->title }}</h5>
@@ -47,7 +49,7 @@
                     </div>
                     <div class="card-footer">
                         <div class="d-flex justify-content-between mt-3">
-                            <a href="/posts" class="link-secondary">Kembali</a>
+                            <a href="/posts" class="link-light">Kembali</a>
                             <small style="font-size: 12px"
                                 class="mt-1">{{ $post->created_at->diffForHumans() }}</small>
                         </div>
@@ -81,8 +83,8 @@
 
 
                         <div class="card-body">
-                            <p style="font-size:12px;">By : <a href="/authors/{{ $post->author->username }}"
-                                    class="link-success text-decoration-none">{{ $post->author->name }}</a>
+                            <p style="font-size:0.9em;">By : <a href=" /authors/{{ $post->author->username }}"
+                                    class="link-light text-decoration-none">{{ $post->author->name }}</a>
                             </p>
 
                             <article>

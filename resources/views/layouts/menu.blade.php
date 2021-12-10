@@ -24,7 +24,7 @@
             </a>
         </li>
         <li style="--i:4;">
-            <a href="/gallery">
+            <a href="#" class="klik_menu" title="Gallery" id="gallery">
                 <ion-icon name="camera-outline"></ion-icon>
             </a>
         </li>
@@ -106,6 +106,14 @@
             } else if (klikMenu == 'organization') {
                 $("#overlay").fadeIn(300);
                 $.get(BASE + '/organization', function(data) {
+                    $("#overlay").fadeOut(300);
+                    $('.container-content').html(data);
+                    // console.log(data);
+                    // console.log(status);
+                });
+            } else if (klikMenu == 'gallery') {
+                $("#overlay").fadeIn(300);
+                $.get(BASE + '/gallery', function(data) {
                     $("#overlay").fadeOut(300);
                     $('.container-content').html(data);
                     // console.log(data);

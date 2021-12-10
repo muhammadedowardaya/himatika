@@ -39,13 +39,13 @@ $(document).ready(function () {
                             ease: "power1.out",
                             bottom: 0,
                             onComplete: () => {
-                                masterTl.restart().delay(1);
+                                masterTl.restart().delay(2);
                                 gsap.to('.container-content', {
-                                    duration: 4,
+                                    duration: 8,
                                     ease: "power1.out",
                                     display: "inline-block",
                                     opacity: 1
-                                }).delay(1);
+                                }).delay(2);
                             }
                         })
 

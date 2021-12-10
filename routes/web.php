@@ -26,11 +26,20 @@ Route::get('/about', function () {
     return view('himatika.about');
 })->name('himatika.about');
 
+Route::get('/gallery', function () {
+    return view('himatika.gallery');
+})->name('himatika.gallery');
+
 Route::get('/organization', function () {
     return view('himatika.organization');
 })->name('himatika.organization');
 
-Route::get('/post/{category:name}', [HimatikaController::class, 'event'])->name('himatika.event');
+Route::get('/post/{category:name}', function (Category $category) {
+    $data = [
+        'events' => $category->posts()->latest()->paginate(6)
+    ];
+    return view('himatika.event', $data);
+});
 
 
 // Login--------------------------------

@@ -5,19 +5,19 @@
             <li>
                 <ul class="director">
                     <li class="ketua">
-                        <a href="#" class="org-card">
+                        <a href="#" class="ordCard">
                             <span>Ketua</span>
                             <span>Rully Ambika</span>
                         </a>
                         <br>
                     <li>
-                        <a href="#" class="org-card">
+                        <a href="#" class="ordCard">
                             <span>Wakil Ketua</span>
                             <span>Aludin</span>
                         </a>
                     </li>
                     <ul class="sekretaris">
-                        <li><a href="#" class="org-card">
+                        <li><a href="#" class="ordCard">
                                 <span>Sekretaris</span>
                                 <span>Neneng F</span>
                             </a>
@@ -25,21 +25,21 @@
                     </ul>
                     <ul class="departments cf">
                         <li>
-                            <a href="#" class="org-card">
+                            <a href="#" class="ordCard">
                                 <span>Bendahara</span>
                                 <span>Hidayah M</span>
                             </a>
                         </li>
 
                         <li class="department dep-a">
-                            <a href="#" class="org-card">
+                            <a href="#" class="ordCard">
                                 <span>Acara</span>
                                 <span class="nama">M Ilham</span>
                                 <span class="nama">Syarah</span>
                             </a>
                             <ul class="sections">
                                 <li class="section">
-                                    <a href="#" class="org-card">
+                                    <a href="#" class="ordCard">
                                         <span>Anggota</span>
                                         <span class="nama">Rahmita</span>
                                         <span class="nama">Edo</span>
@@ -52,14 +52,14 @@
                             </ul>
                         </li>
                         <li class="department dep-b">
-                            <a href="#" class="org-card" id="humas">
+                            <a href="#" class="ordCard" id="humas">
                                 <span>Humas</span>
                                 <span class="nama">Iwan</span>
                                 <span class="nama">Sayyidah</span>
                             </a>
                             <ul class="sections">
                                 <li class="section">
-                                    <a href="#" class="org-card">
+                                    <a href="#" class="ordCard">
                                         <span>Anggota</span>
                                         <span class="nama">Dafa</span>
                                         <span class="nama">Lia</span>
@@ -71,14 +71,14 @@
                             </ul>
                         </li>
                         <li class="department dep-c">
-                            <a href="#" class="org-card" id="multimedia">
+                            <a href="#" class="ordCard" id="multimedia">
                                 <span>Multimedia</span>
                                 <span class="nama">M Asfi P</span>
                                 <span class="nama">St. Nurjanah</span>
                             </a>
                             <ul class="sections">
                                 <li class="section">
-                                    <a href="#" class="org-card">
+                                    <a href="#" class="ordCard">
                                         <span>Anggota</span>
                                         <span class="nama">Tri Agung</span>
                                         <span class="nama">Dais Pratama</span>
@@ -88,13 +88,13 @@
                             </ul>
                         </li>
                         <li class="department tambahGaris dep-d">
-                            <a href="#" id="fundraising" class="org-card">
+                            <a href="#" id="fundraising" class="ordCard">
                                 <span>Fundraising</span>
                                 <span class="nama">Ikhsan Kasrudin</span>
                                 <span class="nama">Rahma</span>
                             </a>
                             <ul class="sections">
-                                <li class="section"><a href="#" class="org-card">
+                                <li class="section"><a href="#" class="ordCard">
                                         <span>Anggota</span>
                                         <span class="nama">Oris R</span>
                                         <span class="nama">Anggun</span>
@@ -104,13 +104,13 @@
                             </ul>
                         </li>
                         <li class="department tambahGaris dep-e">
-                            <a href="#" id="logistik" class="org-card">
+                            <a href="#" id="logistik" class="ordCard">
                                 <span>Logistik</span>
                                 <span class="nama">M Sidik</span>
                                 <span class="nama">Siti Rahmawati</span>
                             </a>
                             <ul class="sections">
-                                <li class="section"><a href="#" class="org-card">
+                                <li class="section"><a href="#" class="ordCard">
                                         <span>Anggota</span>
                                         <span class="nama">Dani</span>
                                         <span class="nama">Syahril</span>
@@ -179,7 +179,7 @@
         margin-top: 10vh;
     }
 
-    a.org-card:focus {
+    a.ordCard:focus {
         outline: 2px dashed #f7f7f7;
     }
 
@@ -547,12 +547,3 @@
     }
 
 </style>
-
-<script>
-    const orgCard = document.querySelectorAll('.orgCard');
-    orgCard.forEach(item => {
-        item.addEventListener('click', (e) => {
-            e.preventDefault()
-        })
-    })
-</script>
