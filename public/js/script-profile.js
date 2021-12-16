@@ -29,7 +29,7 @@ $(document).ready(function () {
                 gsap.to('h2.text-himatika', {
                     duration: 2.5,
                     scale: 0.3,
-                    y: 278,
+                    bottom: "1%",
                     ease: "circ.out",
                     onComplete: () => {
                         gsap.to('.container-menu', {
@@ -37,7 +37,7 @@ $(document).ready(function () {
                             duration: 2,
                             rotationY: 360,
                             ease: "power1.out",
-                            bottom: 0,
+                            bottom: "3%",
                             onComplete: () => {
                                 masterTl.restart().delay(2);
                                 gsap.to('.container-content', {

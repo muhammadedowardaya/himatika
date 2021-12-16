@@ -16,80 +16,89 @@
 body {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: end;
     min-height: 100vh;
     background-color: #07252d !important;
     /* background: rgb(105 122 126); */
 }
 
 h2.text-himatika {
+    margin: 0px 40px;
     position: fixed;
-    top: 43%;
+    bottom: 40%;
     font-size: 5em;
-    color: #0e3742;
+    /*color: #0e3742;*/
+    color: #fff;
+    /*text-shadow: 0 0 10px #03bcf4,*/
+    /*    0 0 20px #03bcf4,*/
+    /*    0 0 40px #03bcf4,*/
+    /*    0 0 80px #03bcf4,*/
+    /*    0 0 160px #03bcf4,*/
+    /*    0 0 400px #03bcf4;*/
+    text-shadow: 0 0 160px #03bcf4;
     text-transform: uppercase;
     width: 100%;
     text-align: center;
-    -webkit-box-reflect: below -42px linear-gradient(transparent, #0004);
-    -moz-box-reflect: below -42px linear-gradient(transparent, #0004);
+    -webkit-box-reflect: below -57px linear-gradient(transparent, #0004);
+    -moz-box-reflect: below -57px linear-gradient(transparent, #0004);
     z-index: 10;
 }
 
-h2.text-himatika span {
-    animation: animate 7s linear infinite;
-}
+/*h2.text-himatika span {*/
+/*    animation: animate 7s linear infinite;*/
+/*}*/
 
-h2.text-himatika span:nth-child(1) {
-    animation-delay: 0.1s
-}
+/*h2.text-himatika span:nth-child(1) {*/
+/*    animation-delay: 0.1s*/
+/*}*/
 
-h2.text-himatika span:nth-child(2) {
-    animation-delay: 0.1s
-}
+/*h2.text-himatika span:nth-child(2) {*/
+/*    animation-delay: 0.1s*/
+/*}*/
 
-h2.text-himatika span:nth-child(3) {
-    animation-delay: 0.4s
-}
+/*h2.text-himatika span:nth-child(3) {*/
+/*    animation-delay: 0.4s*/
+/*}*/
 
-h2.text-himatika span:nth-child(4) {
-    animation-delay: 0.6s
-}
+/*h2.text-himatika span:nth-child(4) {*/
+/*    animation-delay: 0.6s*/
+/*}*/
 
 
-@keyframes animate {
+/*@keyframes animate {*/
 
-    0%,
-    18%,
-    20%,
-    50.1%,
-    60%,
-    65.1%,
-    80%,
-    90.1%,
-    92% {
-        color: #0e3742;
-        text-shadow: none;
-    }
+/*    0%,*/
+/*    18%,*/
+/*    20%,*/
+/*    50.1%,*/
+/*    60%,*/
+/*    65.1%,*/
+/*    80%,*/
+/*    90.1%,*/
+/*    92% {*/
+/*        color: #0e3742;*/
+/*        text-shadow: none;*/
+/*    }*/
 
-    18.1%,
-    20.1%,
-    30%,
-    50%,
-    60.1%,
-    65%,
-    80.1%,
-    90%,
-    92.1%,
-    100% {
-        color: #fff;
-        text-shadow: 0 0 10px #03bcf4,
-            0 0 20px #03bcf4,
-            0 0 40px #03bcf4,
-            0 0 80px #03bcf4,
-            0 0 160px #03bcf4,
-            0 0 400px #03bcf4;
-    }
-}
+/*    18.1%,*/
+/*    20.1%,*/
+/*    30%,*/
+/*    50%,*/
+/*    60.1%,*/
+/*    65%,*/
+/*    80.1%,*/
+/*    90%,*/
+/*    92.1%,*/
+/*    100% {*/
+/*        color: #fff;*/
+/*        text-shadow: 0 0 10px #03bcf4,*/
+/*            0 0 20px #03bcf4,*/
+/*            0 0 40px #03bcf4,*/
+/*            0 0 80px #03bcf4,*/
+/*            0 0 160px #03bcf4,*/
+/*            0 0 400px #03bcf4;*/
+/*    }*/
+/*}*/
 
 /* Button Start */
 
@@ -178,7 +187,7 @@ a.btn:hover span {
 .container-menu {
     position: fixed;
     z-index: 5;
-    bottom: 32px;
+    bottom: 17%;
     opacity: 0;
 }
 

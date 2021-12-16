@@ -43,7 +43,7 @@ class DashboardPostController extends Controller
      */
     public function store(PostRequest $request)
     {
-        $this->authorize('create', Post::class);
+        // $this->authorize('create', Post::class);
         $post = $request->all();
         // buat nama file untuk gambar
         $fileName = date("is") . '_' . $request->file('image')->getClientOriginalName();
