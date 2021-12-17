@@ -12,6 +12,7 @@
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+    @livewireStyles
     {{-- Trix Editor --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('css/trix.css') }}">
     <style>
@@ -26,7 +27,11 @@
 </head>
 
 <body>
-
+    <div id="overlay">
+        <div class="cv-spinner">
+            <span class="spinner"></span>
+        </div>
+    </div>
     @include('dashboard.layouts.header')
 
     <div class="container-fluid">
@@ -120,6 +125,7 @@
 
     {{-- Untuk javascript --}}
     @yield('script')
+    @livewireScripts
 </body>
 
 </html>

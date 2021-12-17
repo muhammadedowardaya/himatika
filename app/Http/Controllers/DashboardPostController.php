@@ -99,7 +99,7 @@ class DashboardPostController extends Controller
      */
     public function edit(Post $post)
     {
-        $this->authorize('update', $post);
+        $this->authorize('view', $post);
         return view('dashboard.posts.edit', [
             'categories' => Category::all(),
             'post' => $post
@@ -152,5 +152,40 @@ class DashboardPostController extends Controller
         Post::destroy($post->id);
         // echo $id;
         // return redirect('/dashboard/posts')->with('success', 'pesan.berhasil("Post has been deleted!")');
+    }
+
+    public function publish()
+    {
+        $data = [
+            'title' => 'Posts Published',
+            'posts' => Post::where('published', 1)->latest()->filter(request(['search', 'category', 'author']))->paginate(6)->withQueryString()
+        ];
+        return view('dashboard.posts.approval', $data);
+    }
+
+    public function pending()
+    {
+        $data = [
+            'title' => 'Posts Pending',
+            'posts' => Post::where('published', 0)->latest()->filter(request(['search', 'category', 'author']))->paginate(6)->withQueryString()
+        ];
+        return view('dashboard.posts.approval', $data);
+    }
+
+
+    public function approval()
+    {
+        $data = [
+            'posts' => Post::latest()->filter(request(['search', 'category', 'author']))->paginate(6)->withQueryString()
+        ];
+        return view('dashboard.posts.approval', $data);
+    }
+
+    public function updateApproval(Request $request, Post $post)
+    {
+        $attr = $request->approval;
+        // $attr['published'] = $request->approval;
+        // $post->update($attr);
+        return $attr;
     }
 }

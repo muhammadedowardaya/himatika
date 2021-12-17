@@ -48,6 +48,37 @@
                             <small>Diupdate pada : {{ $post->updated_at->format('Y F d') }}</small>
                         </div>
                     </div>
+                    @can('admin', Post::class)
+                        {{-- <div class="mb-3">
+                        <label for="approval" class="form-label">Approval</label>
+                        <select class="form-select @error('published') is-invalid @enderror" id="approval" name="published">
+                            <option disabled>Choose One</option>
+                            <option value="1" @if (1 == old('published', $post->published)) selected @endif>Publish</option>
+                            <option value="0" @if (0 == old('published', $post->published)) selected @endif>Pending</option>
+                        </select>
+                        @error('published')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div> --}}
+                        <div class="mb-3">
+                            <label for="approval" class="form-label d-block">Approval</label>
+                            <div class="form-check-inline">
+                                <input class="form-check-input" type="radio" name="published" value="1" id="publish">
+                                <label class="form-check-label" for="publish">
+                                    Publish
+                                </label>
+                            </div>
+                            <div class="form-check-inline">
+                                <input class="form-check-input" type="radio" name="published" value="0" id="pending">
+                                <label class="form-check-label" for="pending">
+                                    Pending
+                                </label>
+                            </div>
+                        </div>
+
+                    @endcan
                 </div>
             </div>
         </div>

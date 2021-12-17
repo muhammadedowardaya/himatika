@@ -42,6 +42,7 @@
                     @enderror
                 </div>
 
+
                 <div class="mb-3">
                     <label for="image" class="form-label gambar">Post Image</label>
                     <input type="hidden" name="oldImage" value="{{ $post->image }}">

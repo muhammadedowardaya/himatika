@@ -39,8 +39,8 @@ h2.text-himatika {
     text-transform: uppercase;
     width: 100%;
     text-align: center;
-    -webkit-box-reflect: below -57px linear-gradient(transparent, #0004);
-    -moz-box-reflect: below -57px linear-gradient(transparent, #0004);
+    -webkit-box-reflect: below -50px linear-gradient(transparent, #0004);
+    -moz-box-reflect: below -50px linear-gradient(transparent, #0004);
     z-index: 10;
 }
 

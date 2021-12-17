@@ -18,7 +18,8 @@ class PostFactory extends Factory
             'slug' => $this->faker->slug(),
             'body' => $this->faker->paragraphs(5, 10),
             'user_id' => mt_rand(1, 3),
-            'category_id' => mt_rand(1, 2)
+            'category_id' => mt_rand(1, 2),
+            'published' => mt_rand(0, 1)
         ];
     }
 }

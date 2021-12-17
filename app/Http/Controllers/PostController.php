@@ -28,7 +28,7 @@ class PostController extends Controller
 
         $data = [
             'title' => '<span class="text-secondary font-weight-bold">All</span> Post' . $title,
-            'posts' => Post::latest()->filter(request(['search', 'category', 'author']))->paginate(6)->withQueryString()
+            'posts' => Post::where('published', 1)->latest()->filter(request(['search', 'category', 'author']))->paginate(6)->withQueryString()
         ];
         return view('posts.index', $data);
     }

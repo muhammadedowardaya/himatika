@@ -61,6 +61,10 @@ Route::get('/dashboard/posts/checkSlug', [DashboardPostController::class, 'check
 // Dashboard Post-------------------------
 Route::prefix('/dashboard/posts')->middleware('auth')->group(function () {
     Route::get('/', [DashboardPostController::class, 'index']);
+    Route::get('/approval', [DashboardPostController::class, 'approval'])->name('approval');
+    // Route::patch('/updateApproval/{post:slug}', [DashboardPostController::class, 'updateApproval'])->name('updateApproval');
+    Route::get('/approval/pending', [DashboardPostController::class, 'pending'])->name('pending');
+    Route::get('/approval/publish', [DashboardPostController::class, 'publish'])->name('publish');
     Route::get('/create', [DashboardPostController::class, 'create'])->name('posts.create');
     Route::get('/{post:slug}', [DashboardPostController::class, 'show']);
     Route::get('/edit/{post:slug}', [DashboardPostController::class, 'edit'])->name('posts.edit');

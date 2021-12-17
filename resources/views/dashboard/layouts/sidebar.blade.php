@@ -36,6 +36,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link{{ request()->is('dashboard/approval*') ? ' active' : '' }}"
+                        href="/dashboard/posts/approval">
+                        <span data-feather="user-check"></span>
+                        Post Approval
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link{{ request()->is('/') ? ' active' : '' }}" href="/">
                         <span data-feather="grid"></span>
                         Himatika Profile

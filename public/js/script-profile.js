@@ -37,7 +37,7 @@ $(document).ready(function () {
                             duration: 2,
                             rotationY: 360,
                             ease: "power1.out",
-                            bottom: "3%",
+                            bottom: "4%",
                             onComplete: () => {
                                 masterTl.restart().delay(2);
                                 gsap.to('.container-content', {
